@@ -1,0 +1,24 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{ .Chart.Name }}-ingress"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    external-dns.alpha.kubernetes.io/aws-region: "{{ .Values.region }}"
+spec:
+  tls:
+    - hosts:
+        - "{{ .Values.domain }}"
+      secretName: ingress-tls-secret
+  rules:
+    - host: "{{ .Values.domain }}"
+      http:
+        paths:
+          - backend:
+              serviceName: orchestrator
+              servicePort: 8935
+            path: /

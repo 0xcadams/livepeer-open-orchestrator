@@ -1,0 +1,21 @@
+apiVersion: skaffold/v2beta21
+kind: Config
+
+deploy:
+  helm:
+    releases:
+      - name: global
+        createNamespace: true
+        chartPath: charts/global
+        setValueTemplates:
+          ingress.region: "{{.AWS_REGION}}"
+          ingress.domain: "{{.DOMAIN}}"
+          letsencrypt.email: "{{.SUPPORT_EMAIL}}"
+      - name: orchestrator
+        createNamespace: true
+        chartPath: charts/orchestrator
+        setValueTemplates:
+          version: "{{.LIVEPEER_VERSION}}"
+          domain: "{{.DOMAIN}}"
+          pricePerUnit: "{{.PRICE_PER_UNIT}}"
+

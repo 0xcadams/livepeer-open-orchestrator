@@ -1,0 +1,29 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+    path:
+      - "./charts"
+      - "./docker"
+
+jobs:
+  terraform:
+    name: "Deploy to Kubernetes"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: azure/setup-kubectl@v2.0
+      - uses: azure/setup-helm@v2
+
+      - name: Deploy Kubernetes with Skaffold
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
+          sudo install skaffold /usr/local/bin/
+          skaffold run

@@ -1,0 +1,29 @@
+---
+ingress:
+  domain: changeme.com
+  region: changeme
+
+cert-manager:
+  installCRDs: true
+  nodeSelector:
+    beta.kubernetes.io/os: linux # to avoid scheduling on windows VMs
+
+external-dns:
+  policy: sync
+  provider: aws
+
+letsencrypt:
+  email: me@changeme.com
+  api: https://acme-v02.api.letsencrypt.org/directory
+
+ingress-nginx:
+  controller:
+    replicaCount: 1
+    nodeSelector:
+      beta.kubernetes.io/os: linux # to avoid scheduling on windows VMs
+    defaultBackend:
+      nodeSelector:
+        beta.kubernetes.io/os: linux # to avoid scheduling on windows VMs
+    config:
+      proxy-body-size: "0"
+      hsts-preload: "true"

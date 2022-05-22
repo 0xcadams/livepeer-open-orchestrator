@@ -1,0 +1,6 @@
+---
+replicaCount: 1
+version: changeme
+domain: changeme.com
+network: arbitrum-one-mainnet
+pricePerUnit: 1100

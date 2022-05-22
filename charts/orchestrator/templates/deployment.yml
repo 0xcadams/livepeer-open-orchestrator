@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "go-livepeer:{{ .Values.version }}"
+          env:
+            - name: LP_ETHPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: livepeer-secrets
+                  key: json-private-key-password
+            - name: LP_ORCHESTRATOR
+              value: true
+            - name: LP_TRANSCODER
+              value: true
+            - name: LP_NETWORK
+              value: "{{ .Values.network }}"
+            - name: LP_PRICEPERUNIT
+              value: {{ .Values.pricePerUnit }}
+            - name: LP_ETHURL
+              value: http://localhost:8555
+            - name: LP_REWARD
+              value: false
+            - name: LP_NVIDIA
+              value: all
+            - name: LP_MAXSESSIONS
+              value: 8
+            - name: LP_SERVICEADDR
+              value: "{{ .Value.domain }}:8935"
+            - name: LP_MONITOR
+              value: true
+          ports:
+            - name: https
+              containerPort: 8935
+          resources:
+            requests:
+              memory: '1Gi'
+              cpu: '2000m'
+            limits:
+              memory: '4Gi'
+              cpu: '4000m'
+          readinessProbe:
+            httpGet:
+              path: /
+              port: https
+          livenessProbe:
+            httpGet:
+              path: /
+              port: https
+          startupProbe:
+            httpGet:
+              path: /
+              port: https
+          volumeMounts:
+            - name: json-private-key
+              mountPath: /root/.lpData/mainnet/keystore/
+              readOnly: true
+      volumes:
+        - name: json-private-key
+          secret:
+            secretName: livepeer-secrets
+            items:
+              - key: json-private-key
+                path: key.json
+      resources:
+        limits:
+          nvidia.com/gpu: 1 # request 1 GPU

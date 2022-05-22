@@ -1,0 +1,24 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: "{{ githubRepo }}"
+  region: "{{ region }}"
+
+managedNodeGroups:
+  - name: "nvidia-1"
+    instanceType: "g4dn.xlarge"
+    desiredCapacity: 1
+    volumeSize: 50
+
+gitops:
+  flux:
+    gitProvider: "github"
+    flags:
+      owner: "{{ githubUser }}"
+      repository: "{{ githubRepo }}"
+      private: "true"
+      branch: "main"
+      namespace: "livepeer"
+      path: "clusters/{{ region }}"
