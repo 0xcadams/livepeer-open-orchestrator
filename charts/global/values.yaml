@@ -1,8 +1,4 @@
 ---
-ingress:
-  domain: changeme.com
-  region: changeme
-
 cert-manager:
   installCRDs: true
   nodeSelector:
@@ -11,6 +7,9 @@ cert-manager:
 external-dns:
   policy: sync
   provider: aws
+  aws-zone-type: public
+  registry: txt
+  txt-owner-id: changeme
 
 letsencrypt:
   email: me@changeme.com
@@ -19,11 +18,6 @@ letsencrypt:
 ingress-nginx:
   controller:
     replicaCount: 1
-    nodeSelector:
-      beta.kubernetes.io/os: linux # to avoid scheduling on windows VMs
-    defaultBackend:
-      nodeSelector:
-        beta.kubernetes.io/os: linux # to avoid scheduling on windows VMs
     config:
       proxy-body-size: "0"
       hsts-preload: "true"

@@ -21,8 +21,8 @@ yarn-error.log*
 *.backup
 .terraform/
 
-./charts/*/charts/
-./charts/*/tmpcharts/
+charts/**/charts/
+charts/**/tmpcharts/
 
 # vercel
 .vercel

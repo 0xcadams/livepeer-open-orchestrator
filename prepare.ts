@@ -7,10 +7,9 @@ const eksFileTemplate = 'eksctl.mustache.yaml';
 
 const main = async () => {
   const awsRegion = process.env.AWS_REGION;
-  const githubUser = process.env.GITHUB_USER;
-  const githubRepo = process.env.GITHUB_REPO;
+  const projectName = process.env.PROJECT_NAME;
 
-  if (!awsRegion || !githubRepo || !githubUser) {
+  if (!awsRegion || !projectName) {
     throw new Error('You must define all environment variables.');
   }
   if (!regions.lookup({ code: awsRegion })) {
@@ -21,8 +20,7 @@ const main = async () => {
 
   const result = mustache.render(source, {
     region: awsRegion,
-    githubUser,
-    githubRepo
+    projectName
   });
 
   await fs.writeFileSync(path.join(__dirname, 'eksctl.yaml'), result);

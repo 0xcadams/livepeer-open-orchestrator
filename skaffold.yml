@@ -8,14 +8,27 @@ deploy:
         createNamespace: true
         chartPath: charts/global
         setValueTemplates:
-          ingress.region: "{{.AWS_REGION}}"
-          ingress.domain: "{{.DOMAIN}}"
           letsencrypt.email: "{{.SUPPORT_EMAIL}}"
+          external-dns.txt-owner-id: "{{.ROUTE_53_HOSTED_ZONE_ID}}"
+      - name: geth
+        createNamespace: true
+        chartPath: charts/geth
+        setValueTemplates:
+          geth.version: "{{.GETH_VERSION}}"
+      - name: arbitrum
+        createNamespace: true
+        chartPath: charts/arbitrum
+        setValueTemplates:
+          arbitrum.version: "{{.ARBITRUM_VERSION}}"
+          arbitrum.infuraProjectId: "{{.INFURA_PROJECT_ID}}"
       - name: orchestrator
         createNamespace: true
         chartPath: charts/orchestrator
         setValueTemplates:
-          version: "{{.LIVEPEER_VERSION}}"
+          region: "{{.AWS_REGION}}"
           domain: "{{.DOMAIN}}"
-          pricePerUnit: "{{.PRICE_PER_UNIT}}"
-
+          orchestrator.version: "{{.LIVEPEER_VERSION}}"
+          orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"
+          orchestrator.reward: "{{.REWARD}}"
+          orchestrator.jsonKey: "{{.JSON_KEY}}"
+          orchestrator.jsonKeyPassword: "{{.JSON_KEY_PASSWORD}}"

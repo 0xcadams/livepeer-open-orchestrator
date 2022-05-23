@@ -5,8 +5,8 @@ on:
     branches:
       - main
     path:
-      - "./charts"
-      - "./docker"
+      - "charts"
+      - "skaffold.yml"
 
 jobs:
   terraform:
@@ -24,6 +24,6 @@ jobs:
       - name: Deploy Kubernetes with Skaffold
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
+          curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
           sudo install skaffold /usr/local/bin/
           skaffold run

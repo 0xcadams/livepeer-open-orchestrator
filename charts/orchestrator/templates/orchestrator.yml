@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Chart.Name }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.orchestrator.replicaCount }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "go-livepeer:{{ .Values.version }}"
+          image: "go-livepeer:{{ .Values.orchestrator.version }}"
           env:
             - name: LP_ETHPASSWORD
               valueFrom:
@@ -29,19 +29,19 @@ spec:
             - name: LP_TRANSCODER
               value: true
             - name: LP_NETWORK
-              value: "{{ .Values.network }}"
+              value: "{{ .Values.orchestrator.network }}"
             - name: LP_PRICEPERUNIT
-              value: {{ .Values.pricePerUnit }}
+              value: {{ .Values.orchestrator.pricePerUnit }}
             - name: LP_ETHURL
-              value: http://localhost:8555
+              value: "http://arbitrum-nginx-failover:8555"
             - name: LP_REWARD
-              value: false
+              value: false # {{ .Values.orchestrator.reward | default "false" }}
             - name: LP_NVIDIA
               value: all
             - name: LP_MAXSESSIONS
               value: 8
             - name: LP_SERVICEADDR
-              value: "{{ .Value.domain }}:8935"
+              value: "{{ .Values.domain }}:8935"
             - name: LP_MONITOR
               value: true
           ports:
