@@ -9,7 +9,7 @@ on:
       - "skaffold.yml"
 
 jobs:
-  terraform:
+  deploy:
     name: "Deploy to Kubernetes"
 
     runs-on: ubuntu-latest
