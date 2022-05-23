@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: azure/setup-helm@v2
+      - uses: azure/setup-helm@v1
 
       - name: Lint
         run: yarn lint
