@@ -1,6 +1,6 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}
   labels:
@@ -15,10 +15,15 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
+      initContainers:
+        - name: wait-for-geth
+          image: curlimages/curl:latest
+          command: ["/bin/sh","-c"]
+          args: ["while [ $(curl -sw '%{http_code}' http://geth:8545 -o /dev/null) -ne 200 ]; do sleep 5; echo 'Waiting...'; done"]
       containers:
         - name: {{ .Chart.Name }}
           image: "offchainlabs/arb-node:{{ .Values.arbitrum.version }}"
-          args: ["--l1.url http://geth:8545"]
+          args: ["--l1.url=http://geth:8545"]
           ports:
             - name: rpc
               containerPort: 8547
@@ -26,9 +31,33 @@ spec:
               containerPort: 8548
             - name: seq
               containerPort: 9642
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #     - sh
+          #     - -c
+          #     - '[ "`geth attach --exec "eth.syncing"`" = "false" ]'-X POST \
+#   http://localhost:8547 \
+#   -H 'Content-Type: application/json' \
+#   -H 'cache-control: no-cache' \
+#   -d '{
+#         "jsonrpc":"2.0",
+#         "method":"web3_clientVersion",
+#         "params":[],
+#         "id":1
+# }'
+          #   initialDelaySeconds: 360
+          #   periodSeconds: 5
           volumeMounts:
             - name: arb-datadir
               mountPath: /home/user/.arbitrum/mainnet
-      volumes:
-        - name: arb-datadir
-          emptyDir: {}
+  serviceName: {{ .Chart.Name }}
+  podManagementPolicy: Parallel
+  volumeClaimTemplates:
+    - metadata:
+        name: arb-datadir
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 200Gi

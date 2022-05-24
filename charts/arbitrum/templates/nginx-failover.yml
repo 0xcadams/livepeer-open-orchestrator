@@ -22,17 +22,15 @@ spec:
             - name: rpc
               containerPort: 8555
           volumeMounts:
-            - mountPath: /etc/nginx # mount nginx-conf volume to /etc/nginx
+            - name: nginx-conf
               readOnly: true
-              name: nginx-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
             - mountPath: /var/log/nginx
               name: log
       volumes:
         - name: nginx-conf
           configMap:
             name: {{ .Chart.Name }}-nginx-failover
-            items:
-              - key: nginx.conf
-                path: nginx.conf
         - name: log
           emptyDir: {}

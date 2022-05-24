@@ -31,18 +31,18 @@ data:
       upstream rpc {
         server {{ .Chart.Name }}:8547 max_fails=1 fail_timeout=3s;
 
-        server 127.0.0.1:8556 backup;
+        server 0.0.0.0:8556 backup;
       }
 
       server {
-        listen 127.0.0.1:8556;
+        listen 0.0.0.0:8556;
         location / {
           proxy_pass https://arbitrum-mainnet.infura.io/v3/{{ .Values.arbitrum.infuraProjectId }};
         }
       }
 
       server {
-        listen 127.0.0.1:8555;
+        listen 0.0.0.0:8555;
 
         location / {
           proxy_pass http://rpc;

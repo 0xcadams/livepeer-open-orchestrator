@@ -7,8 +7,7 @@ orchestrator:
   pricePerUnit: 1100
   reward: 'false'
 
-  jsonKey: changeme
-  jsonKeyPassword: changeme
+  jsonWalletPassword: changeme
 
 region: changeme
 domain: changeme.com

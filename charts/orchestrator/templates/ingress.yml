@@ -1,5 +1,5 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: "{{ .Chart.Name }}-ingress"
@@ -18,7 +18,10 @@ spec:
     - host: "{{ .Values.domain }}"
       http:
         paths:
-          - backend:
-              serviceName: orchestrator
-              servicePort: 8935
-            path: /
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: orchestrator
+                port:
+                  number: 8935

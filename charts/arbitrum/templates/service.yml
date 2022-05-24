@@ -9,10 +9,13 @@ spec:
   ports:
     - port: 8547
       targetPort: rpc
+      name: rpc
     - port: 8548
       targetPort: ws
+      name: ws
     - port: 9642
       targetPort: seq
+      name: seq
   selector:
     app: {{ .Chart.Name }}
   type: ClusterIP

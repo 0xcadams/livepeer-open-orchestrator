@@ -30,5 +30,5 @@ deploy:
           orchestrator.version: "{{.LIVEPEER_VERSION}}"
           orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"
           orchestrator.reward: "{{.REWARD}}"
-          orchestrator.jsonKey: "{{.JSON_KEY}}"
-          orchestrator.jsonKeyPassword: "{{.JSON_KEY_PASSWORD}}"
+          orchestrator.jsonWalletB64: "{{.JSON_WALLET_B64}}"
+          orchestrator.jsonWalletPasswordB64: "{{.JSON_WALLET_PASSWORD_B64}}"

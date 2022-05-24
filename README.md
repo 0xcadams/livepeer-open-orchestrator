@@ -43,9 +43,18 @@ aws route53 create-hosted-zone --name "domain.xyz." --caller-reference "external
 ```
 
 
-eksctl utils associate-iam-oidc-provider --region=ap-southeast-1 --cluster=livepeer-open-orchestrator-ap-southeast-1 --approve
+eksctl utils associate-iam-oidc-provider --region=ap-southeast-1 --cluster=livepeer-open-orchestrator --approve
 
 
 helm repo add nvdp https://nvidia.github.io/k8s-device-plugin
 helm repo add jetstack https://charts.jetstack.io
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx 
+
+GH:
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+
+Only EksAllAccess policy
+
+kubectl create secret generic json-private-key --from-file=key.json
+

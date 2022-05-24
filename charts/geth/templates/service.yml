@@ -9,13 +9,17 @@ spec:
   ports:
     - port: 8545
       targetPort: rpc
+      name: rpc
     - port: 8546
       targetPort: ws
+      name: ws
     - port: 30303
       targetPort: p2p
+      name: p2p
     - port: 30303
       targetPort: p2p-udp
       protocol: UDP
+      name: p2p-udp
   selector:
     app: "{{ .Chart.Name }}"
   type: ClusterIP

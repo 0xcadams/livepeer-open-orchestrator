@@ -3,11 +3,16 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: "{{ projectName }}-{{ region }}"
+  name: "{{ projectName }}"
   region: "{{ region }}"
 
 managedNodeGroups:
   - name: "nvidia-1"
-    instanceType: "t4g.medium" # "g4dn.xlarge"
-    desiredCapacity: 1
-    volumeSize: 100
+    instanceType: "t3.medium" # "g4dn.xlarge"
+    desiredCapacity: 3
+    volumeSize: 80
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        externalDNS: true
+        certManager: true

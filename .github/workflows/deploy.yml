@@ -17,13 +17,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          cache: yarn
+      - name: Install
+        run: yarn --immutable
 
       - uses: azure/setup-kubectl@v2.0
       - uses: azure/setup-helm@v1
 
-      - name: Deploy Kubernetes with Skaffold
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      - name: Deploy with Skaffold
         run: |
           curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
           sudo install skaffold /usr/local/bin/
-          skaffold run
+
+          yarn deploy:eks:ap-southeast-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

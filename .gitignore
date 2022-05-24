@@ -1,6 +1,7 @@
 # Local eksctl.yaml and env files
 eksctl.yaml
 .env
+key.json
 
 ###### ALL
 yarn.lock

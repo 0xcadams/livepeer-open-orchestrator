@@ -17,66 +17,71 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "go-livepeer:{{ .Values.orchestrator.version }}"
+          image: "livepeer/go-livepeer:{{ .Values.orchestrator.version }}"
+          args:
+            - -v=6
+            - -network=$(NETWORK)
+            - -orchestrator=true
+            - -transcoder=true
+            - -monitor=true
+            - -cliAddr=0.0.0.0:7935
+            - -httpAddr=0.0.0.0:8935
+            - -serviceAddr=$(SERVICE_ADDR)
+            - -maxSessions=$(MAX_SESSIONS)
+            # - -nvidia=$(NVIDIA)
+            - -ethUrl=$(ETH_URL)
+            - -ethPassword=$(ETH_PASSWORD)
+            - -pricePerUnit=$(PRICE_PER_UNIT)
           env:
-            - name: LP_ETHPASSWORD
+            - name: ETH_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: livepeer-secrets
+                  name: json-private-key-password
                   key: json-private-key-password
-            - name: LP_ORCHESTRATOR
-              value: true
-            - name: LP_TRANSCODER
-              value: true
-            - name: LP_NETWORK
+            - name: NETWORK
               value: "{{ .Values.orchestrator.network }}"
-            - name: LP_PRICEPERUNIT
-              value: {{ .Values.orchestrator.pricePerUnit }}
-            - name: LP_ETHURL
+            - name: PRICE_PER_UNIT
+              value: "{{ .Values.orchestrator.pricePerUnit }}"
+            - name: ETH_URL
               value: "http://arbitrum-nginx-failover:8555"
-            - name: LP_REWARD
-              value: false # {{ .Values.orchestrator.reward | default "false" }}
-            - name: LP_NVIDIA
-              value: all
-            - name: LP_MAXSESSIONS
-              value: 8
-            - name: LP_SERVICEADDR
+            - name: REWARD
+              value: "false" # {{ .Values.orchestrator.reward | default "false" }}
+            # - name: NVIDIA
+            #   value: "all"
+            - name: MAX_SESSIONS
+              value: "8"
+            - name: SERVICE_ADDR
               value: "{{ .Values.domain }}:8935"
-            - name: LP_MONITOR
-              value: true
           ports:
             - name: https
               containerPort: 8935
+            - name: cli
+              containerPort: 7935
           resources:
             requests:
               memory: '1Gi'
-              cpu: '2000m'
+              cpu: '1000m'
             limits:
               memory: '4Gi'
-              cpu: '4000m'
+              cpu: '2000m'
+              # nvidia.com/gpu: 1
           readinessProbe:
             httpGet:
-              path: /
-              port: https
+              path: /status
+              port: cli
           livenessProbe:
             httpGet:
-              path: /
-              port: https
+              path: /status
+              port: cli
           startupProbe:
             httpGet:
-              path: /
-              port: https
+              path: /status
+              port: cli
           volumeMounts:
             - name: json-private-key
-              mountPath: /root/.lpData/mainnet/keystore/
+              mountPath: "/root/.lpData/{{ .Values.orchestrator.network }}/keystore/"
               readOnly: true
       volumes:
         - name: json-private-key
           secret:
-            secretName: livepeer-secrets
-            items:
-              - key: json-private-key
-                path: key.json
-      resources:
-        limits:
-          nvidia.com/gpu: 1 # request 1 GPU
+            secretName: json-private-key

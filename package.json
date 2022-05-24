@@ -12,11 +12,11 @@
     "create:role:ap-southeast-1": "cross-env AWS_REGION=ap-southeast-1 dotenv yarn create:role",
     "create:role:eu-west-2": "cross-env AWS_REGION=eu-west-2 dotenv yarn create:role",
     "create:role:us-east-1": "cross-env AWS_REGION=us-east-1 dotenv yarn create:role",
-    "create:role": "eksctl create iamserviceaccount --name k8s-service-account --cluster $PROJECT_NAME-$AWS_REGION --region $AWS_REGION --role-name k8s-role --attach-policy-arn $POLICY_ARN --approve --override-existing-serviceaccounts",
+    "create:role": "eksctl create iamserviceaccount --name k8s-service-account --cluster $PROJECT_NAME --region $AWS_REGION --role-name k8s-role --attach-policy-arn $POLICY_ARN --approve --override-existing-serviceaccounts",
     "deploy:eks:ap-southeast-1": "cross-env AWS_REGION=ap-southeast-1 dotenv yarn deploy:eks",
     "deploy:eks:eu-west-2": "cross-env AWS_REGION=eu-west-2 dotenv yarn deploy:eks",
     "deploy:eks:us-east-1": "cross-env AWS_REGION=us-east-1 REWARD=true dotenv yarn deploy:eks",
-    "deploy:eks": "skaffold run",
+    "deploy:eks": "eksctl utils write-kubeconfig --cluster $PROJECT_NAME --region $AWS_REGION && skaffold run",
     "lint": "yarn eslint . --ext .ts && helm lint charts/*",
     "postinstall": "simple-git-hooks",
     "prepare:eks": "ts-node prepare.ts"
