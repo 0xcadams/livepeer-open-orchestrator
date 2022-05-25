@@ -9,7 +9,7 @@ deploy:
         chartPath: charts/global
         setValueTemplates:
           letsencrypt.email: "{{.SUPPORT_EMAIL}}"
-          external-dns.txt-owner-id: "{{.ROUTE_53_HOSTED_ZONE_ID}}"
+          external-dns.txtOwnerId: "{{.AWS_REGION}}"
       - name: geth
         createNamespace: true
         chartPath: charts/geth
@@ -27,6 +27,7 @@ deploy:
         setValueTemplates:
           region: "{{.AWS_REGION}}"
           domain: "{{.DOMAIN}}"
+          orchestrator.ethAddress: "{{.ETH_ADDRESS}}"
           orchestrator.version: "{{.LIVEPEER_VERSION}}"
           orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"
           orchestrator.reward: "{{.REWARD}}"
