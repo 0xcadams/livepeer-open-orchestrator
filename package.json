@@ -1,0 +1,60 @@
+{
+  "name": "livepeer-open-orchestrator",
+  "version": "0.0.1",
+  "description": "Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, using EKS and Helm.",
+  "private": true,
+  "license": "Apache 2.0",
+  "scripts": {
+    "create:eks:california": "cross-env AWS_REGION=us-west-1 dotenv yarn prepare:eks && yarn create:eks",
+    "create:eks:frankfurt": "cross-env AWS_REGION=eu-central-1 dotenv yarn prepare:eks && yarn create:eks",
+    "create:eks:london": "cross-env AWS_REGION=eu-west-2 dotenv yarn prepare:eks && yarn create:eks",
+    "create:eks:singapore": "cross-env AWS_REGION=ap-southeast-1 dotenv yarn prepare:eks && yarn create:eks",
+    "create:eks:virginia": "cross-env AWS_REGION=us-east-1 dotenv yarn prepare:eks && yarn create:eks",
+    "create:eks": "eksctl create cluster --config-file=eksctl.yaml",
+    "deploy:eks:california": "cross-env AWS_REGION=us-west-1 dotenv yarn deploy:eks",
+    "deploy:eks:frankfurt": "cross-env AWS_REGION=eu-central-1 dotenv yarn deploy:eks",
+    "deploy:eks:london": "cross-env AWS_REGION=eu-west-2 dotenv yarn deploy:eks",
+    "deploy:eks:singapore": "cross-env AWS_REGION=ap-southeast-1 dotenv yarn deploy:eks",
+    "deploy:eks:virginia": "cross-env AWS_REGION=us-east-1 dotenv yarn deploy:eks",
+    "deploy:eks": "eksctl utils write-kubeconfig --cluster $PROJECT_NAME --region $AWS_REGION && skaffold run",
+    "lint": "yarn eslint . --ext .ts && helm lint charts/*",
+    "postinstall": "simple-git-hooks",
+    "prepare:eks": "ts-node prepare.ts"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@types/aws-regions": "^2.1.2",
+    "@types/mustache": "^4.1.2",
+    "@types/node": "^17.0.18",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "aws-regions": "^2.3.1",
+    "commitizen": "^4.2.4",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "3.3.0",
+    "dotenv": "^16.0.0",
+    "dotenv-cli": "^5.0.0",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "eslint-utils": "^3.0.0",
+    "git-cz": "^4.8.0",
+    "mustache": "^4.2.0",
+    "prettier": "^2.5.1",
+    "simple-git-hooks": "^2.7.0",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "yarn lint",
+    "prepare-commit-msg": "exec < /dev/tty && node_modules/.bin/cz --hook || true",
+    "commit-msg": "yarn commitlint --edit \"$1\""
+  },
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
+  },
+  "packageManager": "yarn@3.1.1"
+}

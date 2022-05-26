@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "ethereum/client-go:{{ .Values.geth.version }}"
+          command: ["/bin/sh", "-c", "geth --http --http.addr '0.0.0.0' --http.vhosts '*' --http.corsdomain '*' --http.api eth,web3,debug,txpool,net,admin,debug --ws --ws.api eth,web3,debug,txpool,net,admin,debug --ws.origins '*'"]
+          ports:
+            - name: rpc
+              containerPort: 8545
+            - name: ws
+              containerPort: 8546
+            - name: p2p
+              containerPort: 30303
+            - name: p2p-udp
+              containerPort: 30303
+              protocol: UDP
+          resources:
+            requests:
+              memory: 2G
+              cpu: '1000m'
+            limits:
+              memory: 4G
+              cpu: '2000m'
+          readinessProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - '[ "`geth attach --exec "eth.syncing"`" = "false" ]'
+            initialDelaySeconds: 360
+            periodSeconds: 5
+          volumeMounts:
+            - name: geth-datadir
+              mountPath: /root
+  serviceName: {{ .Chart.Name }}
+  podManagementPolicy: Parallel
+  volumeClaimTemplates:
+    - metadata:
+        name: geth-datadir
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1000Gi

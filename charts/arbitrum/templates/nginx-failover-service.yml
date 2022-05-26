@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-nginx-failover
+  labels:
+    app: {{ .Chart.Name }}-nginx-failover
+spec:
+  ports:
+    - port: 8555
+      targetPort: rpc
+  selector:
+    app: {{ .Chart.Name }}-nginx-failover
+  type: ClusterIP

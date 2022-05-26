@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-nginx-failover
+  labels:
+    app: {{ .Chart.Name }}-nginx-failover
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-nginx-failover
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-nginx-failover
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-nginx-failover
+          image: nginx:latest
+          ports:
+            - name: rpc
+              containerPort: 8555
+          volumeMounts:
+            - name: nginx-conf
+              readOnly: true
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - mountPath: /var/log/nginx
+              name: log
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: {{ .Chart.Name }}-nginx-failover
+        - name: log
+          emptyDir: {}

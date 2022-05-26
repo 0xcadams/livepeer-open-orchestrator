@@ -1,0 +1,35 @@
+apiVersion: skaffold/v2beta21
+kind: Config
+
+deploy:
+  helm:
+    releases:
+      - name: global
+        createNamespace: true
+        chartPath: charts/global
+        setValueTemplates:
+          external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
+      - name: geth
+        createNamespace: true
+        chartPath: charts/geth
+        setValueTemplates:
+          geth.version: "{{.GETH_VERSION}}"
+      - name: arbitrum
+        createNamespace: true
+        chartPath: charts/arbitrum
+        setValueTemplates:
+          arbitrum.version: "{{.ARBITRUM_VERSION}}"
+          arbitrum.infuraProjectId: "{{.INFURA_PROJECT_ID}}"
+      - name: orchestrator
+        createNamespace: true
+        chartPath: charts/orchestrator
+        setValueTemplates:
+          region: "{{.AWS_REGION}}"
+          domain: "{{.DOMAIN}}"
+          letsencrypt.email: "{{.SUPPORT_EMAIL}}"
+          orchestrator.ethAddress: "{{.ETH_ADDRESS}}"
+          orchestrator.version: "{{.LIVEPEER_VERSION}}"
+          orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"
+          orchestrator.reward: "{{.REWARD}}"
+          orchestrator.jsonWalletB64: "{{.JSON_WALLET_B64}}"
+          orchestrator.jsonWalletPasswordB64: "{{.JSON_WALLET_PASSWORD_B64}}"

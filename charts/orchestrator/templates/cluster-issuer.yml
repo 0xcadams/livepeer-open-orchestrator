@@ -1,0 +1,19 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: "letsencrypt-cluster-issuer"
+spec:
+  acme:
+    server: "{{ .Values.letsencrypt.api }}"
+    email: "{{ .Values.letsencrypt.email }}"
+    privateKeySecretRef:
+      name: "letsencrypt-issuer"
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+            podTemplate:
+              spec:
+                nodeSelector:
+                  "kubernetes.io/os": linux
