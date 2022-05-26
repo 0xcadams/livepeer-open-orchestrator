@@ -24,7 +24,7 @@ jobs:
       - name: Install
         run: yarn --immutable
 
-      - uses: azure/setup-helm@v1
+      - uses: azure/setup-helm@v2.1
 
       - name: Lint
         run: yarn lint
