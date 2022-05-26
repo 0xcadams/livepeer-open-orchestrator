@@ -4,7 +4,6 @@ eksctl.yaml
 UTC--*
 
 ###### ALL
-yarn.lock
 
 node_modules/
 secrets/
