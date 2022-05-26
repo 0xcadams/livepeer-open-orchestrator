@@ -25,7 +25,7 @@ jobs:
       - name: Install
         run: yarn --immutable
 
-      - uses: azure/setup-kubectl@v2.0
+      - uses: azure/setup-kubectl@v2.1
         with:
           version: 'v1.23.6'
       - uses: azure/setup-helm@v2.1
