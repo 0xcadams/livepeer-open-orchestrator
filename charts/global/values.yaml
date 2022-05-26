@@ -5,15 +5,11 @@ cert-manager:
     beta.kubernetes.io/os: linux # to avoid scheduling on windows VMs
 
 external-dns:
-  policy: sync
+  policy: upsert-only # this must be upsert only, since multiple regions are editing the same dns
   provider: aws
   aws-zone-type: public
   registry: txt
   txtOwnerId: changeme
-
-letsencrypt:
-  email: me@changeme.com
-  api: https://acme-v02.api.letsencrypt.org/directory
 
 ingress-nginx:
   controller:

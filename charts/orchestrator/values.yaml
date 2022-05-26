@@ -13,3 +13,7 @@ orchestrator:
 
 region: changeme
 domain: changeme.com
+
+letsencrypt:
+  email: me@changeme.com
+  api: https://acme-v02.api.letsencrypt.org/directory

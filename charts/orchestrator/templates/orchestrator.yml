@@ -71,7 +71,7 @@ spec:
             limits:
               memory: '4Gi'
               cpu: '2000m'
-              # nvidia.com/gpu: 1
+              nvidia.com/gpu: 1
           readinessProbe:
             httpGet:
               path: /status

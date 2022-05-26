@@ -8,8 +8,17 @@ metadata:
 
 managedNodeGroups:
   - name: "nvidia-1"
-    instanceType: "t3.medium" # "g4dn.xlarge"
-    desiredCapacity: 3
+    instanceType: "g4dn.xlarge"
+    desiredCapacity: 1
+    volumeSize: 80
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        externalDNS: true
+        certManager: true
+  - name: "general-1"
+    instanceType: "t3.small"
+    desiredCapacity: 1
     volumeSize: 80
     iam:
       withAddonPolicies:
