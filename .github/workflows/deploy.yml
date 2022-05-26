@@ -42,6 +42,8 @@ jobs:
           unzip awscliv2.zip
           sudo ./aws/install --update
 
+          aws configure
+
           yarn deploy:eks:singapore
           yarn deploy:eks:virginia
         env:
