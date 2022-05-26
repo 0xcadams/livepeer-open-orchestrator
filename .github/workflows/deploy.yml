@@ -40,3 +40,16 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+          PROJECT_NAME: "livepeer-open-orchestrator"
+          PRICE_PER_UNIT: "1100"
+          LIVEPEER_VERSION: "0.5.31-3aa5ee0d"
+          GETH_VERSION: "v1.10.17"
+          ARBITRUM_VERSION: "v1.4.0-f4bbe91"
+
+          DOMAIN: ${{ secrets.DOMAIN }}
+          SUPPORT_EMAIL: ${{ secrets.SUPPORT_EMAIL }}
+          ETH_ADDRESS: ${{ secrets.ETH_ADDRESS }}
+
+          JSON_KEY_PASSWORD: ${{ secrets.JSON_KEY_PASSWORD }}
+          INFURA_PROJECT_ID: ${{ secrets.INFURA_PROJECT_ID }}
