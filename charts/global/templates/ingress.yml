@@ -1,3 +1,4 @@
+{{ if eq .Values.global.isMainRegion "true" }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -5,22 +6,21 @@ metadata:
   name: "{{ .Chart.Name }}-ingress"
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
 spec:
   tls:
     - hosts:
-        - "{{ .Values.region }}.{{ .Values.domain }}"
+        - "grafana.{{ .Values.global.domain }}"
       secretName: "{{ .Chart.Name }}-ingress-tls-secret"
   ingressClassName: nginx
   rules:
-    - host: "{{ .Values.region }}.{{ .Values.domain }}"
+    - host: "grafana.{{ .Values.global.domain }}"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: orchestrator
+                name: global-grafana
                 port:
-                  number: 8935
+                  number: 3000
+{{ end }}

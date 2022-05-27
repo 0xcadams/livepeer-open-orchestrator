@@ -1,15 +1,28 @@
 ---
 cert-manager:
   installCRDs: true
-  nodeSelector:
-    beta.kubernetes.io/os: linux # to avoid scheduling on windows VMs
+  prometheus:
+    enabled: true
+    servicemonitor:
+      enabled: true
+
+global:
+  isMainRegion: "false"
+  domain: changeme
+  region: changeme
+  allRegions:
+    - "us-east-1"
+    - "ap-southeast-1"
+
+letsencrypt:
+  email: me@changeme.com
+  api: https://acme-v02.api.letsencrypt.org/directory
 
 external-dns:
-  policy: upsert-only # this must be upsert only, since multiple regions are editing the same dns
+  policy: sync
   provider: aws
-  aws-zone-type: public
-  registry: txt
   txtOwnerId: changeme
+  txtPrefix: changeme
 
 ingress-nginx:
   controller:
@@ -17,3 +30,15 @@ ingress-nginx:
     config:
       proxy-body-size: "0"
       hsts-preload: "true"
+
+prometheus-node-exporter:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 200Mi
+    requests:
+      cpu: 500m
+      memory: 200Mi
+
+prometheus:
+  enabled: false

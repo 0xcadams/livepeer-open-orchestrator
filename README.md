@@ -69,6 +69,7 @@ https://docs.aws.amazon.com/eks/latest/userguide/eks-compute.html
 https://dashboard.nightnode.net/d/Quad/multi-node-dash?orgId=1&refresh=30s
 https://monitor.anlivepeer.com/ 
 http://titan-node-orch.com:3000/d/Titan-World-Total/titan-node-all-orchs-total?orgId=1&refresh=1h
+https://grafana.stronk.tech/d/71b6OZ0Gz/orchestrator-overview?orgId=1&refresh=5s&theme=dark
 
 
 https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/TutorialTransitionToLBR.html

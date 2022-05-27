@@ -5,6 +5,9 @@ metadata:
   name: {{ .Chart.Name }}
   labels:
     app: {{ .Chart.Name }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "7935"
 spec:
   replicas: {{ .Values.orchestrator.replicaCount }}
   selector:
@@ -28,7 +31,7 @@ spec:
             - -httpAddr=0.0.0.0:8935
             - -serviceAddr=$(SERVICE_ADDR)
             - -maxSessions=$(MAX_SESSIONS)
-            # - -nvidia=$(NVIDIA)
+            - -nvidia=$(NVIDIA)
             - -ethUrl=$(ETH_URL)
             - -reward=$(REWARD)
             - -ethPassword=$(ETH_PASSWORD)
@@ -51,8 +54,8 @@ spec:
               value: "http://arbitrum-nginx-failover:8555"
             - name: REWARD
               value: "false"
-            # - name: NVIDIA
-            #   value: "all"
+            - name: NVIDIA
+              value: "all"
             - name: MAX_SESSIONS
               value: "8"
             - name: BLOCK_POLLING_INTERVAL

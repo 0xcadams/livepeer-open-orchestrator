@@ -5,6 +5,10 @@ metadata:
   name: {{ .Chart.Name }}
   labels:
     app: {{ .Chart.Name }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/debug/metrics/prometheus"
+    prometheus.io/port: "6060"
 spec:
   replicas: 1
   selector:
@@ -18,7 +22,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "ethereum/client-go:{{ .Values.geth.version }}"
-          command: ["/bin/sh", "-c", "geth --http --http.addr '0.0.0.0' --http.vhosts '*' --http.corsdomain '*' --http.api eth,web3,debug,txpool,net,admin,debug --ws --ws.api eth,web3,debug,txpool,net,admin,debug --ws.origins '*'"]
+          command: ["/bin/sh", "-c", "geth --cache 2048 --metrics --pprof --http --http.addr '0.0.0.0' --http.vhosts '*' --http.corsdomain '*' --http.api eth,web3,debug,txpool,net,admin,debug --ws --ws.api eth,web3,debug,txpool,net,admin,debug --ws.origins '*'"]
           ports:
             - name: rpc
               containerPort: 8545
@@ -36,14 +40,15 @@ spec:
             limits:
               memory: 4G
               cpu: '2000m'
-          readinessProbe:
-            exec:
-              command:
-              - sh
-              - -c
-              - '[ "`geth attach --exec "eth.syncing"`" = "false" ]'
-            initialDelaySeconds: 360
-            periodSeconds: 5
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #     - sh
+          #     - -c
+          #     - '[ "`geth attach --exec "eth.syncing"`" = "false" ]'
+          #   initialDelaySeconds: 360
+          #   periodSeconds: 30
+          #   failureThreshold: 1000
           volumeMounts:
             - name: geth-datadir
               mountPath: /root

@@ -8,6 +8,10 @@ deploy:
         createNamespace: true
         chartPath: charts/global
         setValueTemplates:
+          global.isMainRegion: "{{.MAIN_REGION}}"
+          global.region: "{{.AWS_REGION}}"
+          global.domain: "{{.DOMAIN}}"
+          external-dns.txtPrefix: "{{.AWS_REGION}}."
           external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
       - name: geth
         createNamespace: true

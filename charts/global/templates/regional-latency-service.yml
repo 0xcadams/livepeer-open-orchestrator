@@ -1,0 +1,18 @@
+# this service handles the deployment of the global DNS entries
+# which route requests based on latency to a region
+{{ if eq .Values.global.isMainRegion "true" }}
+{{- range $.Values.global.allRegions }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: "{{ $.Chart.Name }}-{{ . }}-regional-service"
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: "{{ $.Values.global.domain }}"
+    external-dns.alpha.kubernetes.io/set-identifier: "{{ . }}-id"
+    external-dns.alpha.kubernetes.io/aws-region: "{{ . }}"
+spec:
+  type: ExternalName
+  externalName: "{{ . }}.{{ $.Values.global.domain }}"
+{{- end }}
+{{ end }}

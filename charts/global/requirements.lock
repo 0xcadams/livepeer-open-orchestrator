@@ -3,10 +3,13 @@ dependencies:
   repository: https://charts.jetstack.io
   version: v1.8.0
 - name: external-dns
-  repository: https://charts.bitnami.com/bitnami
-  version: 6.4.4
+  repository: https://kubernetes-sigs.github.io/external-dns
+  version: 1.9.0
 - name: ingress-nginx
   repository: https://kubernetes.github.io/ingress-nginx
   version: 4.1.1
-digest: sha256:28ac1779ec7b4aee77a48c2458c2d075406f18313dc26fb8912e9225533a2d30
-generated: "2022-05-25T20:51:58.051599-07:00"
+- name: kube-prometheus-stack
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 35.4.2
+digest: sha256:b24bf93de654aa3d2ad62edeadb854c5e0165a20f6e80b001cd271a86d2d6133
+generated: "2022-05-27T16:51:24.226382-07:00"

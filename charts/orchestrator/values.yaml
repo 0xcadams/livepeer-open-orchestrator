@@ -1,7 +1,7 @@
 ---
 orchestrator:
   replicaCount: 1
-  network: arbitrum-one-mainnet
+  network: offchain # arbitrum-one-mainnet
   ethAddress: 0xchangeme
 
   version: changeme
@@ -13,7 +13,3 @@ orchestrator:
 
 region: changeme
 domain: changeme.com
-
-letsencrypt:
-  email: me@changeme.com
-  api: https://acme-v02.api.letsencrypt.org/directory
