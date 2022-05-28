@@ -1,4 +1,4 @@
-{{ if eq .Values.global.isMainRegion "true" }}
+{{ if .Values.global.isMainRegion }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

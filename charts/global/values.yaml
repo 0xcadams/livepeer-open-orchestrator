@@ -7,7 +7,7 @@ cert-manager:
       enabled: true
 
 global:
-  isMainRegion: "false"
+  isMainRegion: false
   domain: changeme
   region: changeme
   allRegions:
@@ -39,6 +39,3 @@ prometheus-node-exporter:
     requests:
       cpu: 500m
       memory: 200Mi
-
-prometheus:
-  enabled: false
