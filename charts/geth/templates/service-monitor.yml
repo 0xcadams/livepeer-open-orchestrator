@@ -1,0 +1,16 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: "{{ .Chart.Name }}-monitor"
+  labels:
+    release: "global"
+spec:
+  selector:
+    matchLabels:
+      app: "{{ .Chart.Name }}"
+  endpoints:
+    - port: metrics
+      path: "/debug/metrics/prometheus"
+  targetLabels:
+    - "{{ .Values.geth.region }}"

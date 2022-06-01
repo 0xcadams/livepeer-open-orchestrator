@@ -14,20 +14,18 @@ spec:
     metadata:
       labels:
         app: {{ .Chart.Name }}
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/debug/metrics/prometheus"
-        prometheus.io/port: "6060"
     spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "ethereum/client-go:{{ .Values.geth.version }}"
-          command: ["/bin/sh", "-c", "geth --cache 2048 --metrics --pprof --http --http.addr '0.0.0.0' --http.vhosts '*' --http.corsdomain '*' --http.api eth,web3,debug,txpool,net,admin,debug --ws --ws.api eth,web3,debug,txpool,net,admin,debug --ws.origins '*'"]
+          command: ["/bin/sh", "-c", "geth --cache 2048 --metrics --metrics.addr 0.0.0.0 --http --http.addr '0.0.0.0' --http.vhosts '*' --http.corsdomain '*' --http.api eth,web3,debug,txpool,net,admin,debug --ws --ws.api eth,web3,debug,txpool,net,admin,debug --ws.origins '*'"]
           ports:
             - name: rpc
               containerPort: 8545
             - name: ws
               containerPort: 8546
+            - name: metrics
+              containerPort: 6060
             - name: p2p
               containerPort: 30303
             - name: p2p-udp
@@ -35,10 +33,10 @@ spec:
               protocol: UDP
           resources:
             requests:
-              memory: 2G
+              memory: 1G
               cpu: '1000m'
             limits:
-              memory: 4G
+              memory: 2G
               cpu: '2000m'
           # readinessProbe:
           #   exec:

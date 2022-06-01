@@ -1,3 +1,4 @@
 ---
 geth:
+  region: changeme
   version: changeme

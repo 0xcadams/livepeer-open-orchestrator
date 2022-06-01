@@ -5,8 +5,11 @@ cert-manager:
     enabled: true
     servicemonitor:
       enabled: true
+      labels:
+        release: "global"
 
 global:
+  projectName: changeme
   isMainRegion: false
   domain: changeme
   region: changeme
@@ -24,8 +27,52 @@ external-dns:
   txtOwnerId: changeme
   txtPrefix: changeme
 
+kube-prometheus-stack:
+  grafana:
+    enabled: false
+    additionalDataSources:
+      - name: Thanos
+        url: http://global-thanos-query:9090
+  prometheus:
+    prometheusSpec:
+      thanos:
+        objectStorageConfig:
+          key: "objstore.yml"
+          name: "thanos-config"
+      externalLabels:
+        region: changeme
+    thanosService:
+      enabled: true
+    thanosServiceMonitor:
+      enabled: true
+
+thanos:
+  existingObjstoreSecret: "thanos-config"
+  query:
+    enabled: false
+    dnsDiscovery:
+      sidecarsService: "global-kube-prometheus-sta-thanos-discovery"
+  queryFrontend:
+    enabled: false
+  compactor:
+    enabled: false
+  storegateway:
+    enabled: false
+  ruler:
+    enabled: false
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
 ingress-nginx:
   controller:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        additionalLabels:
+          release: global
+        enabled: true
     replicaCount: 1
     config:
       proxy-body-size: "0"

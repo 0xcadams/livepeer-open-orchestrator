@@ -11,17 +11,39 @@ managedNodeGroups:
     instanceType: "g4dn.xlarge"
     desiredCapacity: 1
     volumeSize: 80
+    labels:
+      nvidia: "true"
     iam:
       withAddonPolicies:
         autoScaler: true
         externalDNS: true
         certManager: true
+      # attach policy for metrics s3 storage
+      attachPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: "s3:*"
+            Resource:
+              - "arn:aws:s3:::{{ projectName }}"
+              - "arn:aws:s3:::{{ projectName }}/*"
   - name: "general-1"
     instanceType: "t3.small"
-    desiredCapacity: 1
+    desiredCapacity: {{ generalPodCapacity }}
     volumeSize: 80
+    labels:
+      nvidia: "false"
     iam:
       withAddonPolicies:
         autoScaler: true
         externalDNS: true
         certManager: true
+      # attach policy for metrics s3 storage
+      attachPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: "s3:*"
+            Resource:
+              - "arn:aws:s3:::{{ projectName }}"
+              - "arn:aws:s3:::{{ projectName }}/*"

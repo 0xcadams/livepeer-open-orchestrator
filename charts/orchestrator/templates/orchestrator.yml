@@ -14,9 +14,6 @@ spec:
     metadata:
       labels:
         app: {{ .Chart.Name }}
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "7935"
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -61,7 +58,7 @@ spec:
             - name: BLOCK_POLLING_INTERVAL
               value: "{{ .Values.orchestrator.blockPollingInterval }}"
             - name: SERVICE_ADDR
-              value: "{{ .Values.domain }}:8935"
+              value: "{{ .Values.orchestrator.domain }}:8935"
           ports:
             - name: https
               containerPort: 8935

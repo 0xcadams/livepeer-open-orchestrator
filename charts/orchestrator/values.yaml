@@ -11,5 +11,5 @@ orchestrator:
 
   jsonWalletPassword: changeme
 
-region: changeme
-domain: changeme.com
+  region: changeme
+  domain: changeme.com

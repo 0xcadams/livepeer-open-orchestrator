@@ -1,4 +1,5 @@
 ---
 arbitrum:
+  region: changeme
   version: changeme
   infuraProjectId: changeme

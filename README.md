@@ -73,3 +73,8 @@ https://grafana.stronk.tech/d/71b6OZ0Gz/orchestrator-overview?orgId=1&refresh=5s
 
 
 https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/TutorialTransitionToLBR.html
+
+
+
+aws s3api create-bucket --bucket $PROJECT_NAME --region us-east-1 --acl private
+kubectl create secret generic thanos-config --from-file=objstore.yml=thanos-storage-config.yml 

@@ -13,6 +13,9 @@ spec:
     - port: 8546
       targetPort: ws
       name: ws
+    - port: 6060
+      targetPort: metrics
+      name: metrics
     - port: 30303
       targetPort: p2p
       name: p2p
