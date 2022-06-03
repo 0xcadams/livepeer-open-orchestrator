@@ -55,7 +55,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "yarn lint",
-    "prepare-commit-msg": "exec < /dev/tty && node_modules/.bin/cz --hook || true",
+    "prepare-commit-msg": "exec < /dev/tty && node_modules/.bin/cz --disable-emoji --hook || true",
     "commit-msg": "yarn commitlint --edit \"$1\""
   },
   "config": {
