@@ -1,5 +1,11 @@
 ---
+global:
+  domain: changeme
+  isMainRegion: false
 arbitrum:
   region: changeme
   version: changeme
   infuraProjectId: changeme
+  rpc:
+    username: changeme
+    password: changeme

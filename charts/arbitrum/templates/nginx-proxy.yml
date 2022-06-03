@@ -1,23 +1,22 @@
-{{ if .Values.global.isMainRegion }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-nginx-failover
+  name: {{ .Chart.Name }}-nginx-proxy
   labels:
-    app: {{ .Chart.Name }}-nginx-failover
+    app: {{ .Chart.Name }}-nginx-proxy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-nginx-failover
+      app: {{ .Chart.Name }}-nginx-proxy
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-nginx-failover
+        app: {{ .Chart.Name }}-nginx-proxy
     spec:
       containers:
-        - name: {{ .Chart.Name }}-nginx-failover
+        - name: {{ .Chart.Name }}-nginx-proxy
           image: nginx:latest
           ports:
             - name: rpc
@@ -39,7 +38,6 @@ spec:
       volumes:
         - name: nginx-conf
           configMap:
-            name: {{ .Chart.Name }}-nginx-failover
+            name: {{ .Chart.Name }}-nginx-proxy
         - name: log
           emptyDir: {}
-{{ end }}

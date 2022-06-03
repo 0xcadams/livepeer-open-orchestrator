@@ -17,14 +17,17 @@ const main = async () => {
     throw new Error('The AWS_REGION you provided is not a valid value. Please try again.');
   }
 
-  // configure w/ 3 supporting nodes for "main" region and 1 for others
-  const generalPodCapacity = isMainRegion ? 3 : 1;
+  // configure w/ 2 supporting nodes for "main" region and 0 for others
+  const generalPodCapacity = isMainRegion ? 2 : 1;
+
+  const largePodCapacity = isMainRegion ? 1 : 0;
 
   const source = await fs.readFileSync(eksFileTemplate, 'utf-8');
 
   const result = mustache.render(source, {
     region: awsRegion,
     projectName,
+    largePodCapacity,
     generalPodCapacity
   });
 

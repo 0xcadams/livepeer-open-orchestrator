@@ -2,6 +2,7 @@
 eksctl.yaml
 .env
 UTC--*
+auth
 
 ###### ALL
 

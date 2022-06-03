@@ -4,6 +4,14 @@ kind: Config
 deploy:
   helm:
     releases:
+      - name: geth
+        createNamespace: true
+        chartPath: charts/geth
+        setValueTemplates:
+          global.isMainRegion: "{{.IS_MAIN_REGION}}"
+          global.domain: "{{.DOMAIN}}"
+          geth.version: "{{.GETH_VERSION}}"
+          geth.region: "{{.AWS_REGION}}"
       - name: global
         createNamespace: true
         chartPath: charts/global
@@ -23,22 +31,20 @@ deploy:
           thanos.queryFrontend.enabled: "{{.IS_MAIN_REGION}}"
           # thanos.compactor.enabled: "{{.IS_MAIN_REGION}}"
           thanos.storegateway.enabled: "{{.IS_MAIN_REGION}}"
-      - name: geth
+      - name: arbitrum
         createNamespace: true
-        chartPath: charts/geth
+        chartPath: charts/arbitrum
         setValueTemplates:
-          geth.version: "{{.GETH_VERSION}}"
-          geth.region: "{{.AWS_REGION}}"
-      # - name: arbitrum
-      #   createNamespace: true
-      #   chartPath: charts/arbitrum
-      #   setValueTemplates:
-      #     arbitrum.version: "{{.ARBITRUM_VERSION}}"
-      #     arbitrum.infuraProjectId: "{{.INFURA_PROJECT_ID}}"
+          global.isMainRegion: "{{.IS_MAIN_REGION}}"
+          arbitrum.version: "{{.ARBITRUM_VERSION}}"
+          arbitrum.infuraProjectId: "{{.INFURA_PROJECT_ID}}"
+          arbitrum.rpc.username: "{{.RPC_BASIC_AUTH_USERNAME}}"
+          arbitrum.rpc.password: "{{.RPC_BASIC_AUTH_PASSWORD}}"
       - name: orchestrator
         createNamespace: true
         chartPath: charts/orchestrator
         setValueTemplates:
+          global.isMainRegion: "{{.IS_MAIN_REGION}}"
           orchestrator.region: "{{.AWS_REGION}}"
           orchestrator.domain: "{{.DOMAIN}}"
           orchestrator.ethAddress: "{{.ETH_ADDRESS}}"

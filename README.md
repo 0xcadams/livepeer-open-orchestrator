@@ -81,3 +81,7 @@ aws s3api create-bucket --bucket $PROJECT_NAME --region us-east-1 --acl private
 
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
+
+basic auth:
+htpasswd -c auth orchestrator
+kubectl create secret generic rpc-auth --from-file=auth

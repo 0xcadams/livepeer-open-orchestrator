@@ -1,9 +1,8 @@
-{{ if .Values.global.isMainRegion }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Chart.Name }}-nginx-failover
+  name: "{{ .Chart.Name }}-nginx-proxy"
 data:
   nginx.conf: |
     user nginx;
@@ -29,25 +28,12 @@ data:
               'request_time:$request_time';
       access_log	/var/log/nginx/access.log main;
 
-      upstream rpc {
-        server {{ .Chart.Name }}:8547 max_fails=1 fail_timeout=3s;
-
-        server 0.0.0.0:8556 backup;
-      }
-
-      server {
-        listen 0.0.0.0:8556;
-        location / {
-          proxy_pass https://arbitrum-mainnet.infura.io/v3/{{ .Values.arbitrum.infuraProjectId }};
-        }
-      }
-
       server {
         listen 0.0.0.0:8555;
 
         location / {
-          proxy_pass http://rpc;
+          proxy_set_header Authorization "Basic {{ (printf "%s:%s" .Values.arbitrum.rpc.username .Values.arbitrum.rpc.password) | b64enc }}";
+          proxy_pass https://rpc.{{ .Values.global.domain }};
         }
       }
     }
-{{ end }}

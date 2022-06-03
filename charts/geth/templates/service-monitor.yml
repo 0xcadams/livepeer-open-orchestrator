@@ -1,3 +1,4 @@
+{{ if .Values.global.isMainRegion }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -14,3 +15,4 @@ spec:
       path: "/debug/metrics/prometheus"
   targetLabels:
     - "{{ .Values.geth.region }}"
+{{ end }}

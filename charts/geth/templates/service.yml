@@ -1,3 +1,4 @@
+{{ if .Values.global.isMainRegion }}
 ---
 apiVersion: v1
 kind: Service
@@ -26,3 +27,4 @@ spec:
   selector:
     app: "{{ .Chart.Name }}"
   type: ClusterIP
+{{ end }}

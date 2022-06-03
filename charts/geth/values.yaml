@@ -1,4 +1,6 @@
 ---
+global:
+  isMainRegion: false
 geth:
   region: changeme
   version: changeme
