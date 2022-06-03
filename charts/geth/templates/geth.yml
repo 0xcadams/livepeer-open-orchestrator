@@ -36,7 +36,7 @@ spec:
               memory: 1G
               cpu: '1000m'
             limits:
-              memory: 2G
+              memory: 3.5G
               cpu: '2000m'
           # readinessProbe:
           #   exec:

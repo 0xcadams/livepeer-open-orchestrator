@@ -15,7 +15,7 @@ global:
   region: changeme
   allRegions:
     - "us-east-1"
-    - "ap-southeast-1"
+    - "eu-central-1"
 
 letsencrypt:
   email: me@changeme.com
@@ -30,9 +30,6 @@ external-dns:
 kube-prometheus-stack:
   grafana:
     enabled: false
-    additionalDataSources:
-      - name: Thanos
-        url: http://global-thanos-query:9090
   prometheus:
     prometheusSpec:
       thanos:
@@ -77,12 +74,3 @@ ingress-nginx:
     config:
       proxy-body-size: "0"
       hsts-preload: "true"
-
-prometheus-node-exporter:
-  resources:
-    limits:
-      cpu: 500m
-      memory: 200Mi
-    requests:
-      cpu: 500m
-      memory: 200Mi

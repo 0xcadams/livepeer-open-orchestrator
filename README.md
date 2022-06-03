@@ -77,4 +77,7 @@ https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/TutorialTransitionToLB
 
 
 aws s3api create-bucket --bucket $PROJECT_NAME --region us-east-1 --acl private
-kubectl create secret generic thanos-config --from-file=objstore.yml=thanos-storage-config.yml 
+
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+

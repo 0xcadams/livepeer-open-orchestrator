@@ -14,6 +14,7 @@ deploy:
           global.domain: "{{.DOMAIN}}"
           external-dns.txtPrefix: "{{.AWS_REGION}}."
           external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
+          letsencrypt.email: "{{.SUPPORT_EMAIL}}"
           kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.region: "{{.AWS_REGION}}"
           kube-prometheus-stack.grafana.enabled: "{{.IS_MAIN_REGION}}"
           thanos.query.enabled: "{{.IS_MAIN_REGION}}"
@@ -36,12 +37,10 @@ deploy:
         createNamespace: true
         chartPath: charts/orchestrator
         setValueTemplates:
-          region: "{{.AWS_REGION}}"
-          domain: "{{.DOMAIN}}"
-          letsencrypt.email: "{{.SUPPORT_EMAIL}}"
+          orchestrator.region: "{{.AWS_REGION}}"
+          orchestrator.domain: "{{.DOMAIN}}"
           orchestrator.ethAddress: "{{.ETH_ADDRESS}}"
           orchestrator.version: "{{.LIVEPEER_VERSION}}"
           orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"
           orchestrator.reward: "{{.REWARD}}"
-          orchestrator.jsonWalletB64: "{{.JSON_WALLET_B64}}"
-          orchestrator.jsonWalletPasswordB64: "{{.JSON_WALLET_PASSWORD_B64}}"
+          orchestrator.jsonWalletPassword: "{{.JSON_WALLET_PASSWORD}}"
