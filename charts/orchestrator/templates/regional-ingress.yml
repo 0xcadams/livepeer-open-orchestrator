@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{ .Chart.Name }}-regional-ingress"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  tls:
+    - hosts:
+        - "{{ .Values.orchestrator.region }}.{{ .Values.orchestrator.domain }}"
+      secretName: "{{ .Chart.Name }}-regional-ingress-tls-secret"
+  ingressClassName: nginx
+  rules:
+    - host: "{{ .Values.orchestrator.region }}.{{ .Values.orchestrator.domain }}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: orchestrator
+                port:
+                  number: 8935

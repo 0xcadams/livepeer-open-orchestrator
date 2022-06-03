@@ -2,19 +2,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "{{ .Chart.Name }}-ingress"
+  name: '{{ .Chart.Name }}-main-ingress'
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    cert-manager.io/cluster-issuer: 'letsencrypt-cluster-issuer'
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    # do not create DNS records, since the main k8s cluster will handle the geolocation DNS
+    # this only exists for issuing certificates with letsencrypt and routing incoming traffic
+    external-dns.alpha.kubernetes.io/exclude: 'true'
 spec:
   tls:
     - hosts:
-        - "{{ .Values.orchestrator.region }}.{{ .Values.orchestrator.domain }}"
-      secretName: "{{ .Chart.Name }}-ingress-tls-secret"
+        - '{{ .Values.orchestrator.domain }}'
+      secretName: '{{ .Chart.Name }}-main-ingress-tls-secret'
   ingressClassName: nginx
   rules:
-    - host: "{{ .Values.orchestrator.region }}.{{ .Values.orchestrator.domain }}"
+    - host: '{{ .Values.orchestrator.domain }}'
       http:
         paths:
           - path: /

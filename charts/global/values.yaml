@@ -9,6 +9,7 @@ cert-manager:
         release: "global"
 
 global:
+  version: changeme
   projectName: changeme
   isMainRegion: false
   domain: changeme
@@ -26,6 +27,8 @@ external-dns:
   provider: aws
   txtOwnerId: changeme
   txtPrefix: changeme
+  extraArgs:
+    - "--annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)"
 
 kube-prometheus-stack:
   grafana:
@@ -38,6 +41,7 @@ kube-prometheus-stack:
           name: "thanos-config"
       externalLabels:
         region: changeme
+        version: changeme
     thanosService:
       enabled: true
     thanosServiceMonitor:

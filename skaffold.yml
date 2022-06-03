@@ -8,6 +8,7 @@ deploy:
         createNamespace: true
         chartPath: charts/global
         setValueTemplates:
+          global.version: "{{.RELEASE_VERSION}}"
           global.projectName: "{{.PROJECT_NAME}}"
           global.isMainRegion: "{{.IS_MAIN_REGION}}"
           global.region: "{{.AWS_REGION}}"
@@ -16,6 +17,7 @@ deploy:
           external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
           letsencrypt.email: "{{.SUPPORT_EMAIL}}"
           kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.region: "{{.AWS_REGION}}"
+          # kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.version: "{{.RELEASE_VERSION}}"
           kube-prometheus-stack.grafana.enabled: "{{.IS_MAIN_REGION}}"
           thanos.query.enabled: "{{.IS_MAIN_REGION}}"
           thanos.queryFrontend.enabled: "{{.IS_MAIN_REGION}}"
@@ -27,12 +29,12 @@ deploy:
         setValueTemplates:
           geth.version: "{{.GETH_VERSION}}"
           geth.region: "{{.AWS_REGION}}"
-      - name: arbitrum
-        createNamespace: true
-        chartPath: charts/arbitrum
-        setValueTemplates:
-          arbitrum.version: "{{.ARBITRUM_VERSION}}"
-          arbitrum.infuraProjectId: "{{.INFURA_PROJECT_ID}}"
+      # - name: arbitrum
+      #   createNamespace: true
+      #   chartPath: charts/arbitrum
+      #   setValueTemplates:
+      #     arbitrum.version: "{{.ARBITRUM_VERSION}}"
+      #     arbitrum.infuraProjectId: "{{.INFURA_PROJECT_ID}}"
       - name: orchestrator
         createNamespace: true
         chartPath: charts/orchestrator
