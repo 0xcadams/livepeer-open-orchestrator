@@ -35,10 +35,11 @@ jobs:
           curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
           sudo mv /tmp/eksctl /usr/local/bin
 
-          yarn creds:eks:virginia
-
-          kubectl config current-context      
-          kubectl get pods
+          helm repo add cert-manager https://charts.jetstack.io
+          helm repo add external-dns https://kubernetes-sigs.github.io/external-dns
+          helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+          helm repo add kube-prometheus-stack https://prometheus-community.github.io/helm-charts
+          helm repo add thanos https://charts.bitnami.com/bitnami
 
           yarn deploy:eks:virginia
         env:
