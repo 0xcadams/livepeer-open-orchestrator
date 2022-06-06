@@ -96,8 +96,7 @@ spec:
             - name: lp-data
               mountPath: /root/.lpData
             - name: json-private-key
-              mountPath: "/root/.lpData/{{ .Values.orchestrator.network }}/keystore/wallet"
-              subPath: "wallet.secret"
+              mountPath: "/root/.lpData/{{ .Values.orchestrator.network }}/keystore"
               readOnly: true
       volumes:
         - name: json-private-key

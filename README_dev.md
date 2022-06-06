@@ -56,7 +56,8 @@ GH:
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 
-Only EksAllAccess policy
+https://aws.amazon.com/premiumsupport/knowledge-center/eks-api-server-unauthorized-error/
+
 
 kubectl create secret generic json-private-key --from-file=key.json
 
