@@ -58,7 +58,7 @@ spec:
             - name: BLOCK_POLLING_INTERVAL
               value: "{{ .Values.orchestrator.blockPollingInterval }}"
             - name: SERVICE_ADDR
-              value: "{{ .Values.orchestrator.domain }}:8935"
+              value: "{{ .Values.global.domain }}:8935"
           ports:
             - name: https
               containerPort: 8935
@@ -72,18 +72,18 @@ spec:
               memory: 4Gi
               cpu: '2000m'
               nvidia.com/gpu: 1
-          readinessProbe:
-            httpGet:
-              path: /status
-              port: cli
-          livenessProbe:
-            httpGet:
-              path: /status
-              port: cli
-          startupProbe:
-            httpGet:
-              path: /status
-              port: cli
+          # readinessProbe:
+          #   httpGet:
+          #     path: /status
+          #     port: cli
+          # livenessProbe:
+          #   httpGet:
+          #     path: /status
+          #     port: cli
+          # startupProbe:
+          #   httpGet:
+          #     path: /status
+          #     port: cli
           volumeMounts:
             - name: lp-data
               mountPath: /root/.lpData

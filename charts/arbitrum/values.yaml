@@ -1,11 +1,15 @@
 ---
 global:
+  isPrimaryCluster: false
+  releaseVersion: changeme
+  projectName: changeme
   domain: changeme
-  isMainRegion: false
-arbitrum:
   region: changeme
+
+arbitrum:
   version: changeme
   infuraProjectId: changeme
+  ftkuhnsmanApiKey: changeme
   rpc:
     username: changeme
     password: changeme

@@ -1,6 +1,6 @@
 # this service handles the deployment of the global DNS entries
 # which route requests based on latency to a region
-{{ if .Values.global.isMainRegion }}
+{{ if .Values.global.isPrimaryCluster }}
 {{- range $.Values.global.allRegions }}
 ---
 kind: Service

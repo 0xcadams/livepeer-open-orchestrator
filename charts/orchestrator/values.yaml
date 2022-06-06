@@ -1,15 +1,19 @@
 ---
+global:
+  isPrimaryCluster: false
+  releaseVersion: changeme
+  projectName: changeme
+  domain: changeme
+  region: changeme
+
 orchestrator:
   replicaCount: 1
-  network: offchain # arbitrum-one-mainnet
+  network: arbitrum-one-mainnet
   ethAddress: 0xchangeme
 
   version: changeme
   pricePerUnit: 1100
-  blockPollingInterval: 10
+  blockPollingInterval: 15
   reward: 'false'
 
   jsonWalletPassword: changeme
-
-  region: changeme
-  domain: changeme.com

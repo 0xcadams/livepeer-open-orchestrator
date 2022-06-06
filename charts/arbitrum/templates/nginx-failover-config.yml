@@ -1,4 +1,4 @@
-{{ if .Values.global.isMainRegion }}
+{{ if .Values.global.isPrimaryCluster }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -15,7 +15,7 @@ data:
     }
 
     http {
-      log_format  main
+      log_format main
               'remote_addr:$remote_addr\t'
               'time_local:$time_local\t'
               'method:$request_method\t'
@@ -29,7 +29,7 @@ data:
               'request_time:$request_time';
       access_log	/var/log/nginx/access.log main;
 
-      upstream rpc {
+      upstream rpc1 {
         server {{ .Chart.Name }}:8547 max_fails=1 fail_timeout=3s;
 
         server 0.0.0.0:8556 backup;
@@ -37,6 +37,26 @@ data:
 
       server {
         listen 0.0.0.0:8556;
+        location / {
+          proxy_pass http://rpc2;
+        }
+      }
+
+      upstream rpc2 {
+        server 0.0.0.0:8557;
+
+        server 0.0.0.0:8558 backup;
+      }
+
+      server {
+        listen 0.0.0.0:8557;
+        location / {
+          proxy_pass https://arbitrum.ftkuhnsman.com/api/{{ .Values.arbitrum.ftkuhnsmanApiKey }}/l2/;
+        }
+      }
+
+      server {
+        listen 0.0.0.0:8558;
         location / {
           proxy_pass https://arbitrum-mainnet.infura.io/v3/{{ .Values.arbitrum.infuraProjectId }};
         }
@@ -46,7 +66,7 @@ data:
         listen 0.0.0.0:8555;
 
         location / {
-          proxy_pass http://rpc;
+          proxy_pass http://rpc2;
         }
       }
     }

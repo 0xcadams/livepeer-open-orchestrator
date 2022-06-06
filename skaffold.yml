@@ -8,17 +8,34 @@ deploy:
         createNamespace: true
         chartPath: charts/geth
         setValueTemplates:
-          global.isMainRegion: "{{.IS_MAIN_REGION}}"
+          global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
+          global.releaseVersion: "{{.RELEASE_VERSION}}"
+          global.projectName: "{{.PROJECT_NAME}}"
+          global.region: "{{.AWS_REGION}}"
           global.domain: "{{.DOMAIN}}"
           geth.version: "{{.GETH_VERSION}}"
           geth.region: "{{.AWS_REGION}}"
+      - name: arbitrum
+        createNamespace: true
+        chartPath: charts/arbitrum
+        setValueTemplates:
+          global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
+          global.releaseVersion: "{{.RELEASE_VERSION}}"
+          global.projectName: "{{.PROJECT_NAME}}"
+          global.region: "{{.AWS_REGION}}"
+          global.domain: "{{.DOMAIN}}"
+          arbitrum.version: "{{.ARBITRUM_VERSION}}"
+          arbitrum.infuraProjectId: "{{.INFURA_PROJECT_ID}}"
+          arbitrum.ftkuhnsmanApiKey: "{{.FTKUHNSMAN_API_KEY}}"
+          arbitrum.rpc.username: "{{.RPC_BASIC_AUTH_USERNAME}}"
+          arbitrum.rpc.password: "{{.RPC_BASIC_AUTH_PASSWORD}}"
       - name: global
         createNamespace: true
         chartPath: charts/global
         setValueTemplates:
-          global.version: "{{.RELEASE_VERSION}}"
+          global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
+          global.releaseVersion: "{{.RELEASE_VERSION}}"
           global.projectName: "{{.PROJECT_NAME}}"
-          global.isMainRegion: "{{.IS_MAIN_REGION}}"
           global.region: "{{.AWS_REGION}}"
           global.domain: "{{.DOMAIN}}"
           external-dns.txtPrefix: "{{.AWS_REGION}}."
@@ -26,27 +43,20 @@ deploy:
           letsencrypt.email: "{{.SUPPORT_EMAIL}}"
           kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.region: "{{.AWS_REGION}}"
           # kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.version: "{{.RELEASE_VERSION}}"
-          kube-prometheus-stack.grafana.enabled: "{{.IS_MAIN_REGION}}"
-          thanos.query.enabled: "{{.IS_MAIN_REGION}}"
-          thanos.queryFrontend.enabled: "{{.IS_MAIN_REGION}}"
-          # thanos.compactor.enabled: "{{.IS_MAIN_REGION}}"
-          thanos.storegateway.enabled: "{{.IS_MAIN_REGION}}"
-      - name: arbitrum
-        createNamespace: true
-        chartPath: charts/arbitrum
-        setValueTemplates:
-          global.isMainRegion: "{{.IS_MAIN_REGION}}"
-          arbitrum.version: "{{.ARBITRUM_VERSION}}"
-          arbitrum.infuraProjectId: "{{.INFURA_PROJECT_ID}}"
-          arbitrum.rpc.username: "{{.RPC_BASIC_AUTH_USERNAME}}"
-          arbitrum.rpc.password: "{{.RPC_BASIC_AUTH_PASSWORD}}"
+          kube-prometheus-stack.grafana.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          thanos.query.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          thanos.queryFrontend.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          # thanos.compactor.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          thanos.storegateway.enabled: "{{.IS_PRIMARY_CLUSTER}}"
       - name: orchestrator
         createNamespace: true
         chartPath: charts/orchestrator
         setValueTemplates:
-          global.isMainRegion: "{{.IS_MAIN_REGION}}"
-          orchestrator.region: "{{.AWS_REGION}}"
-          orchestrator.domain: "{{.DOMAIN}}"
+          global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
+          global.releaseVersion: "{{.RELEASE_VERSION}}"
+          global.projectName: "{{.PROJECT_NAME}}"
+          global.region: "{{.AWS_REGION}}"
+          global.domain: "{{.DOMAIN}}"
           orchestrator.ethAddress: "{{.ETH_ADDRESS}}"
           orchestrator.version: "{{.LIVEPEER_VERSION}}"
           orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"

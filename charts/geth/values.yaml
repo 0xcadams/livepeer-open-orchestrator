@@ -1,6 +1,10 @@
 ---
 global:
-  isMainRegion: false
-geth:
+  isPrimaryCluster: false
+  releaseVersion: changeme
+  projectName: changeme
+  domain: changeme
   region: changeme
+
+geth:
   version: changeme

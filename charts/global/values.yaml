@@ -1,4 +1,14 @@
 ---
+global:
+  isPrimaryCluster: false
+  releaseVersion: changeme
+  projectName: changeme
+  domain: changeme
+  region: changeme
+  allRegions:
+    - "us-east-1"
+    # - "eu-central-1"
+
 cert-manager:
   installCRDs: true
   prometheus:
@@ -7,16 +17,15 @@ cert-manager:
       enabled: true
       labels:
         release: "global"
-
-global:
-  version: changeme
-  projectName: changeme
-  isMainRegion: false
-  domain: changeme
-  region: changeme
-  allRegions:
-    - "us-east-1"
-    - "eu-central-1"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: alpha.eksctl.io/nodegroup-name
+                operator: In
+                values:
+                  - general-1
 
 letsencrypt:
   email: me@changeme.com
@@ -33,6 +42,15 @@ external-dns:
 kube-prometheus-stack:
   grafana:
     enabled: false
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: alpha.eksctl.io/nodegroup-name
+                  operator: In
+                  values:
+                    - general-1
   prometheus:
     prometheusSpec:
       thanos:
@@ -65,8 +83,20 @@ thanos:
     enabled: true
     serviceMonitor:
       enabled: true
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: alpha.eksctl.io/nodegroup-name
+                operator: In
+                values:
+                  - general-1
 
 ingress-nginx:
+  # this configures the nginx pod to listen to port 8935 and forward to our orchestrator service
+  tcp:
+    8935: "default/orchestrator:8935"
   controller:
     metrics:
       enabled: true
@@ -76,5 +106,4 @@ ingress-nginx:
         enabled: true
     replicaCount: 1
     config:
-      proxy-body-size: "0"
       hsts-preload: "true"

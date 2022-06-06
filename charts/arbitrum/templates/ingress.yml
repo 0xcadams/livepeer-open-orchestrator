@@ -1,4 +1,4 @@
-{{ if .Values.global.isMainRegion }}
+{{ if .Values.global.isPrimaryCluster }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

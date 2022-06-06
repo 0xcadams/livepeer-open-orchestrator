@@ -8,7 +8,7 @@ const eksFileTemplate = 'eksctl.mustache.yaml';
 const main = async () => {
   const awsRegion = process.env.AWS_REGION;
   const projectName = process.env.PROJECT_NAME;
-  const isMainRegion = Boolean(process.env.IS_MAIN_REGION);
+  const isPrimaryCluster = Boolean(process.env.IS_PRIMARY_CLUSTER);
 
   if (!awsRegion || !projectName) {
     throw new Error('You must define all environment variables.');
@@ -18,9 +18,9 @@ const main = async () => {
   }
 
   // configure w/ 2 supporting nodes for "main" region and 0 for others
-  const generalPodCapacity = isMainRegion ? 2 : 1;
+  const generalPodCapacity = isPrimaryCluster ? 2 : 1;
 
-  const largePodCapacity = isMainRegion ? 1 : 0;
+  const largePodCapacity = isPrimaryCluster ? 1 : 0;
 
   const source = await fs.readFileSync(eksFileTemplate, 'utf-8');
 

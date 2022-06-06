@@ -1,4 +1,4 @@
-{{ if .Values.global.isMainRegion }}
+{{ if .Values.global.isPrimaryCluster }}
 ---
 apiVersion: v1
 kind: Service

@@ -12,5 +12,3 @@ spec:
   endpoints:
     - port: cli
       path: "/metrics"
-  targetLabels:
-    - "{{ .Values.orchestrator.region }}"

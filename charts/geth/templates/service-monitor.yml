@@ -1,4 +1,4 @@
-{{ if .Values.global.isMainRegion }}
+{{ if .Values.global.isPrimaryCluster }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -13,6 +13,4 @@ spec:
   endpoints:
     - port: metrics
       path: "/debug/metrics/prometheus"
-  targetLabels:
-    - "{{ .Values.geth.region }}"
 {{ end }}

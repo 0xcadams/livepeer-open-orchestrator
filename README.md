@@ -42,8 +42,13 @@ https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-poli
 aws route53 create-hosted-zone --name "domain.xyz." --caller-reference "external-dns-$(date +%s)"
 ```
 
+kubectl exec -it geth-0 -- geth account new
+kubectl exec -it geth-0 -- cat /root/.ethereum/keystore/... > UTC--worker
+kubectl create secret generic json-private-key --from-file=UTC--worker
 
 eksctl utils associate-iam-oidc-provider --region=ap-southeast-1 --cluster=livepeer-open-orchestrator --approve
+
+
 
 
 helm repo add nvdp https://nvidia.github.io/k8s-device-plugin

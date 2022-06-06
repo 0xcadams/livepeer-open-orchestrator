@@ -9,11 +9,11 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "{{ .Values.orchestrator.region }}.{{ .Values.orchestrator.domain }}"
+        - "{{ .Values.global.region }}.{{ .Values.global.domain }}"
       secretName: "{{ .Chart.Name }}-regional-ingress-tls-secret"
   ingressClassName: nginx
   rules:
-    - host: "{{ .Values.orchestrator.region }}.{{ .Values.orchestrator.domain }}"
+    - host: "{{ .Values.global.region }}.{{ .Values.global.domain }}"
       http:
         paths:
           - path: /
