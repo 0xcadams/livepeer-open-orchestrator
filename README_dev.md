@@ -49,6 +49,9 @@ helm repo add nvdp https://nvidia.github.io/k8s-device-plugin
 helm repo add jetstack https://charts.jetstack.io
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx 
 
+https://docs.aws.amazon.com/eks/latest/userguide/security_iam_id-based-policy-examples.html
+AmazonEKSAdminPolicy
+
 GH:
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
