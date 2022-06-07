@@ -10,7 +10,7 @@
 Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, using Helm and EKS.
 	
 <p>
-  <a href="https://www.npmjs.com/package/wagmi">
+  <a href="https://github.com/0xcadams/livepeer-open-orchestrator/releases">
     <img src="https://img.shields.io/github/v/release/0xcadams/livepeer-open-orchestrator?display_name=tag&colorA=21262d&colorB=161b22&style=flat" alt="Version">
   </a>
   <a href="/LICENSE">
