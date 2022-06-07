@@ -53,6 +53,8 @@ kube-prometheus-stack:
                     - general-1
   prometheus:
     prometheusSpec:
+      podMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
       thanos:
         objectStorageConfig:
           key: "objstore.yml"
