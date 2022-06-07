@@ -10,6 +10,9 @@
 Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, using Helm and EKS.
 
 <p>
+  <a href="https://explorer.livepeer.org/accounts/0xfc9122f12b23d89a33f7e073072b9bf60aab3fa4/orchestrating">
+    <img src="https://img.shields.io/static/v1?label=livepeer&message=open-orchestrator.eth&colorA=21262d&colorB=161b22&style=flat" alt="Version">
+  </a>
   <a href="https://github.com/0xcadams/livepeer-open-orchestrator/releases">
     <img src="https://img.shields.io/github/v/release/0xcadams/livepeer-open-orchestrator?display_name=tag&colorA=21262d&colorB=161b22&style=flat" alt="Version">
   </a>

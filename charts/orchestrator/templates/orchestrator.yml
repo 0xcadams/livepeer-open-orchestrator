@@ -99,6 +99,11 @@ spec:
               mountPath: "/root/.lpData/{{ .Values.orchestrator.network }}/keystore/wallet"
               subPath: key.json
               readOnly: true
+        - name: "{{ .Chart.Name }}-gpu-monitoring"
+          image: petrgrishin/nvidia-smi-exporter@sha256:5432f666b7c40bcebf160bfc802f79004ad8b7dc38f7668ac4d02d7c4c86eea1
+          env:
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: compute,video,utility
       volumes:
         - name: json-private-key
           secret:
