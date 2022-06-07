@@ -2,8 +2,8 @@ name: deploy
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "*"
 
 jobs:
   deploy:
@@ -24,8 +24,6 @@ jobs:
 
       - uses: azure/setup-helm@v2.1
       - uses: azure/setup-kubectl@v2.1
-        with:
-          version: "v1.23.6"
 
       - name: Deploy with Skaffold
         run: |
