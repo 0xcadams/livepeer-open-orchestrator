@@ -3,6 +3,7 @@ eksctl.yaml
 .env
 UTC--*
 key.json
+orchestrator.json
 auth
 
 ###### ALL

@@ -68,7 +68,7 @@ https://aws.amazon.com/premiumsupport/knowledge-center/eks-api-server-unauthoriz
 kubectl create secret generic json-private-key --from-file=key.json=UTC--2022-04-07T22-09-32.184230565Z--6ea5f8a6cb44dab35ab2c89cb52e5c1bc8b83e09
 
 https://forum.livepeer.org/t/guide-the-most-secure-way-to-run-an-orchestrator-as-of-june-2022/1840
-
+https://livepeer.ftkuhnsman.com/accounts/login/?next=/accounts/profile/
 
 
 https://gist.github.com/papabear99/712754617d6a7fdb5438a5b621e1be89

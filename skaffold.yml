@@ -44,6 +44,7 @@ deploy:
           kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.region: "{{.AWS_REGION}}"
           kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.version: "{{.RELEASE_VERSION}}"
           kube-prometheus-stack.grafana.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          kube-prometheus-stack.grafana.adminPassword: "{{.GRAFANA_PASSWORD}}"
           thanos.query.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.queryFrontend.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.compactor.enabled: "{{.IS_PRIMARY_CLUSTER}}"
