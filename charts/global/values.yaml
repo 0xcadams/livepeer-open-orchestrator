@@ -73,6 +73,7 @@ thanos:
     enabled: false
     dnsDiscovery:
       sidecarsService: "global-kube-prometheus-sta-thanos-discovery"
+      sidecarsNamespace: "default"
   queryFrontend:
     enabled: false
   compactor:
