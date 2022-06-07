@@ -101,6 +101,33 @@ thanos:
                 values:
                   - general-1
 
+prometheus-json-exporter:
+  serviceMonitor:
+    enabled: true
+    targets:
+      - name: stream-scores                   
+        url: https://changeme.com
+  configuration:
+    config: |
+      ---
+      metrics:
+        - name: transcoding_stream_scores
+          type: object
+          help: Raw transcoder stats
+          path: '{[*][0]}'
+          labels:
+            id: '{.timestamp}'
+            region: '{.region}'
+          values:
+            segments_sent: '{.segments_sent}'
+            segments_received: '{.segments_received}'
+            success_rate: '{.success_rate}'
+            seg_duration: '{.seg_duration}'
+            upload_time: '{.upload_time}'
+            download_time: '{.download_time}'
+            transcode_time: '{.transcode_time}'
+            round_trip_time: '{.round_trip_time}'
+
 ingress-nginx:
   # this configures the nginx pod to listen to port 8935 and forward to our orchestrator service
   tcp:
