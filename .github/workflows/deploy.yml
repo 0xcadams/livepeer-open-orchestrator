@@ -68,3 +68,4 @@ jobs:
           FTKUHNSMAN_API_KEY: ${{ secrets.FTKUHNSMAN_API_KEY }}
 
           RPC_BASIC_AUTH_PASSWORD: ${{ secrets.RPC_BASIC_AUTH_PASSWORD }}
+          GRAFANA_PASSWORD: ${{ secrets.GRAFANA_PASSWORD }}

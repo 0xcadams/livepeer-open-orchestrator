@@ -1,6 +1,6 @@
 {
   "name": "livepeer-open-orchestrator",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, using EKS and Helm.",
   "private": true,
   "license": "Apache 2.0",
