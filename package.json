@@ -1,6 +1,6 @@
 {
   "name": "livepeer-open-orchestrator",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, using EKS and Helm.",
   "private": true,
   "license": "Apache 2.0",
@@ -26,7 +26,8 @@
     "create:metrics-bucket": "cross-env dotenv aws s3api create-bucket --bucket $PROJECT_NAME --region us-east-1",
     "lint": "yarn eslint . --ext .ts && helm lint charts/*",
     "postinstall": "simple-git-hooks",
-    "prepare:eks": "ts-node prepare.ts"
+    "prepare:eks": "ts-node prepare.ts",
+    "release": "CI=true npx semantic-release"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
@@ -49,6 +50,7 @@
     "git-cz": "^4.8.0",
     "mustache": "^4.2.0",
     "prettier": "^2.5.1",
+    "semantic-release": "^19.0.2",
     "simple-git-hooks": "^2.8.0",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"
@@ -63,5 +65,10 @@
       "path": "git-cz"
     }
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.1.1",
+  "release": {
+    "branches": [
+      "main"
+    ]
+  }
 }
