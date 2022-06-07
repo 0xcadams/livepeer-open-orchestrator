@@ -14,5 +14,4 @@ spec:
     - port: cli
       path: "/metrics"
     - port: gpu-metrics
-      path: "/metrics/"
-
+      path: "/metrics"
