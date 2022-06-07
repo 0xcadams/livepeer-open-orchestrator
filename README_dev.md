@@ -36,11 +36,17 @@ https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-poli
 aws route53 create-hosted-zone --name "domain.xyz." --caller-reference "external-dns-$(date +%s)"
 ```
 
-kubectl exec -it geth-0 -- geth account new
-kubectl exec -it geth-0 -- cat /root/.ethereum/keystore/... > UTC--worker
-kubectl create secret generic json-private-key --from-file=UTC--worker
+```bash
+> docker run -d --name "geth" ethereum/client-go
+> docker exec -it geth geth account new
 
-eksctl utils associate-iam-oidc-provider --region=ap-southeast-1 --cluster=livepeer-open-orchestrator --approve
+...
+Path of the secret key file: /root/.ethereum/keystore/...
+...
+
+> docker exec -it geth cat /root/.ethereum/keystore/... > key.json
+> kubectl create secret generic json-private-key --from-file=key.json=key.json
+```
 
 
 
@@ -59,7 +65,11 @@ AWS_SECRET_ACCESS_KEY
 https://aws.amazon.com/premiumsupport/knowledge-center/eks-api-server-unauthorized-error/
 
 
-kubectl create secret generic json-private-key --from-file=key.json
+kubectl create secret generic json-private-key --from-file=key.json=UTC--2022-04-07T22-09-32.184230565Z--6ea5f8a6cb44dab35ab2c89cb52e5c1bc8b83e09
+
+https://forum.livepeer.org/t/guide-the-most-secure-way-to-run-an-orchestrator-as-of-june-2022/1840
+
+
 
 https://gist.github.com/papabear99/712754617d6a7fdb5438a5b621e1be89
 https://www.google.com/maps/d/u/0/viewer?mid=1XzxUxgd59Dr3RSzPewGKBD8mt3M77s9C&ll=33.20949996250803%2C-93.65468425600724&z=5
@@ -88,3 +98,5 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 basic auth:
 htpasswd -c auth orchestrator
 kubectl create secret generic rpc-auth --from-file=auth
+
+

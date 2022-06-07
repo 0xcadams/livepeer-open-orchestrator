@@ -57,7 +57,7 @@ spec:
             - name: PRICE_PER_UNIT
               value: "{{ .Values.orchestrator.pricePerUnit }}"
             - name: ETH_URL
-              value: "http://arbitrum-nginx-failover:8555"
+              value: "http://arbitrum-nginx-proxy:8555"
             - name: REWARD
               value: "false"
             - name: NVIDIA
@@ -96,12 +96,14 @@ spec:
             - name: lp-data
               mountPath: /root/.lpData
             - name: json-private-key
-              mountPath: "/root/.lpData/{{ .Values.orchestrator.network }}/keystore"
+              mountPath: "/root/.lpData/{{ .Values.orchestrator.network }}/keystore/wallet"
+              subPath: key.json
               readOnly: true
       volumes:
         - name: json-private-key
           secret:
             secretName: json-private-key
+            defaultMode: 0400
         - name: lp-data
           emptyDir:
             medium: Memory

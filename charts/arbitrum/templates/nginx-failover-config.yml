@@ -36,6 +36,8 @@ data:
         listen 0.0.0.0:8557;
         location / {
           proxy_pass https://arbitrum.ftkuhnsman.com/api/{{ .Values.arbitrum.ftkuhnsmanApiKey }}/l2/;
+          proxy_set_header Host arbitrum.ftkuhnsman.com;
+          proxy_set_header X-Forwarded-Host arbitrum.ftkuhnsman.com;
         }
       }
 
@@ -43,6 +45,8 @@ data:
         listen 0.0.0.0:8558;
         location / {
           proxy_pass https://arbitrum-mainnet.infura.io/v3/{{ .Values.arbitrum.infuraProjectId }};
+          proxy_set_header Host arbitrum-mainnet.infura.io;
+          proxy_set_header X-Forwarded-Host arbitrum-mainnet.infura.io;
         }
       }
 
