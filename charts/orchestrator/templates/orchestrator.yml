@@ -104,6 +104,16 @@ spec:
           env:
             - name: NVIDIA_DRIVER_CAPABILITIES
               value: compute,video,utility
+          ports:
+            - name: gpu-metrics
+              containerPort: 9102
+          resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 50m
+              memory: 100Mi
       volumes:
         - name: json-private-key
           secret:

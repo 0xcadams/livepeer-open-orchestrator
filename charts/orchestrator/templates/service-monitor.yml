@@ -13,3 +13,6 @@ spec:
   endpoints:
     - port: cli
       path: "/metrics"
+    - port: gpu-metrics
+      path: "/metrics/"
+

@@ -69,3 +69,4 @@ jobs:
 
           RPC_BASIC_AUTH_PASSWORD: ${{ secrets.RPC_BASIC_AUTH_PASSWORD }}
           GRAFANA_PASSWORD: ${{ secrets.GRAFANA_PASSWORD }}
+          JSON_WALLET_PASSWORD: ${{ secrets.JSON_WALLET_PASSWORD }}

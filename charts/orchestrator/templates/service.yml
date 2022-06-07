@@ -13,6 +13,9 @@ spec:
     - name: cli
       port: 7935
       targetPort: cli
+    - name: gpu-metrics
+      port: 9102
+      targetPort: gpu-metrics
   selector:
     app: {{ .Chart.Name }}
   type: ClusterIP
