@@ -41,7 +41,7 @@ deploy:
           external-dns.txtPrefix: "{{.AWS_REGION}}."
           external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
           letsencrypt.email: "{{.SUPPORT_EMAIL}}"
-          prometheus-json-exporter.serviceMonitor.targets[0].url: "https://leaderboard-serverless.vercel.app/api/aggregated_stats?orchestrator={{.ETH_ADDRESS}}"
+          prometheus-json-exporter.serviceMonitor.targets[0].url: "https://leaderboard-serverless.vercel.app/api/raw_stats?orchestrator={{.ETH_ADDRESS}}"
           kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.region: "{{.AWS_REGION}}"
           kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.version: "{{.RELEASE_VERSION}}"
           kube-prometheus-stack.grafana.enabled: "{{.IS_PRIMARY_CLUSTER}}"
