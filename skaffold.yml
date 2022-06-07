@@ -46,7 +46,7 @@ deploy:
           kube-prometheus-stack.grafana.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.query.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.queryFrontend.enabled: "{{.IS_PRIMARY_CLUSTER}}"
-          # thanos.compactor.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          thanos.compactor.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.storegateway.enabled: "{{.IS_PRIMARY_CLUSTER}}"
       - name: orchestrator
         createNamespace: true

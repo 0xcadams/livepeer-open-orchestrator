@@ -7,8 +7,12 @@ metadata:
     app: {{ .Chart.Name }}
 spec:
   ports:
-    - port: 8935
+    - name: https
+      port: 8935
       targetPort: https
+    - name: cli
+      port: 7935
+      targetPort: cli
   selector:
     app: {{ .Chart.Name }}
   type: ClusterIP
