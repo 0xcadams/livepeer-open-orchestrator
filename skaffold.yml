@@ -42,7 +42,7 @@ deploy:
           external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
           letsencrypt.email: "{{.SUPPORT_EMAIL}}"
           kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.region: "{{.AWS_REGION}}"
-          # kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.version: "{{.RELEASE_VERSION}}"
+          kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.version: "{{.RELEASE_VERSION}}"
           kube-prometheus-stack.grafana.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.query.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.queryFrontend.enabled: "{{.IS_PRIMARY_CLUSTER}}"
