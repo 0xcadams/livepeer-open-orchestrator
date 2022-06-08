@@ -76,7 +76,9 @@ thanos:
   existingObjstoreSecret: "thanos-config"
   query:
     enabled: false
+    existingSDConfigmap: "global-thanos-sd"
     dnsDiscovery:
+      enabled: false
       sidecarsService: "global-kube-prometheus-sta-thanos-discovery"
       sidecarsNamespace: "default"
   queryFrontend:
