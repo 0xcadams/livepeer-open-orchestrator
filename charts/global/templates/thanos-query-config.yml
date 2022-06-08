@@ -6,7 +6,8 @@ metadata:
   name: "{{ .Chart.Name }}-thanos-sd"
 data:
   servicediscovery.yml: |
-    {{- range .Values.global.allRegions }}
-    https://{{ . }}.thanos.{{ $.Values.global.domain }}
-    {{- end }}
+    - targets:
+      {{- range .Values.global.allRegions }}
+      - 'https://{{ . }}.thanos.{{ $.Values.global.domain }}'
+      {{- end }}
 {{ end }}

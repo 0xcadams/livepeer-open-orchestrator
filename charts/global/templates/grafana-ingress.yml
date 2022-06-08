@@ -20,7 +20,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: global-grafana
+                name: "{{ .Chart.Name }}-grafana"
                 port:
                   number: 3000
 {{ end }}
