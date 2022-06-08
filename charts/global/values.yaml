@@ -7,7 +7,7 @@ global:
   region: changeme
   allRegions:
     - "us-east-1"
-    # - "eu-central-1"
+    - "eu-central-1"
 
 cert-manager:
   installCRDs: true
