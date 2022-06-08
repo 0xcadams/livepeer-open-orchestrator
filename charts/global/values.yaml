@@ -40,6 +40,8 @@ external-dns:
     - "--annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)"
 
 kube-prometheus-stack:
+  ingress:
+    supportsPathType: true
   grafana:
     enabled: false
     adminPassword: changeme
@@ -73,6 +75,7 @@ kube-prometheus-stack:
       enabled: true
     thanosIngress:
       enabled: true
+      pathType: Prefix
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
