@@ -117,7 +117,7 @@ prometheus-json-exporter:
           path: '{.FRA[0]}'
           labels:
             id: '{.timestamp}'
-            region: '{.region}'
+            source: '{.region}'
           values:
             segments_sent: '{.segments_sent}'
             segments_received: '{.segments_received}'
@@ -133,7 +133,7 @@ prometheus-json-exporter:
           path: '{.LAX[0]}'
           labels:
             id: '{.timestamp}'
-            region: '{.region}'
+            source: '{.region}'
           values:
             segments_sent: '{.segments_sent}'
             segments_received: '{.segments_received}'
@@ -149,7 +149,7 @@ prometheus-json-exporter:
           path: '{.LON[0]}'
           labels:
             id: '{.timestamp}'
-            region: '{.region}'
+            source: '{.region}'
           values:
             segments_sent: '{.segments_sent}'
             segments_received: '{.segments_received}'
@@ -165,7 +165,7 @@ prometheus-json-exporter:
           path: '{.MDW[0]}'
           labels:
             id: '{.timestamp}'
-            region: '{.region}'
+            source: '{.region}'
           values:
             segments_sent: '{.segments_sent}'
             segments_received: '{.segments_received}'
@@ -181,7 +181,7 @@ prometheus-json-exporter:
           path: '{.NYC[0]}'
           labels:
             id: '{.timestamp}'
-            region: '{.region}'
+            source: '{.region}'
           values:
             segments_sent: '{.segments_sent}'
             segments_received: '{.segments_received}'
@@ -197,7 +197,7 @@ prometheus-json-exporter:
           path: '{.PRG[0]}'
           labels:
             id: '{.timestamp}'
-            region: '{.region}'
+            source: '{.region}'
           values:
             segments_sent: '{.segments_sent}'
             segments_received: '{.segments_received}'
@@ -213,7 +213,7 @@ prometheus-json-exporter:
           path: '{.SIN[0]}'
           labels:
             id: '{.timestamp}'
-            region: '{.region}'
+            source: '{.region}'
           values:
             segments_sent: '{.segments_sent}'
             segments_received: '{.segments_received}'
