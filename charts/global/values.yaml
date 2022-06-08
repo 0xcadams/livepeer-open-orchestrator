@@ -102,6 +102,7 @@ thanos:
                   - general-1
 
 prometheus-json-exporter:
+  enabled: false
   serviceMonitor:
     enabled: true
     targets:
