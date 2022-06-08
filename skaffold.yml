@@ -47,6 +47,8 @@ deploy:
           kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.version: "{{.RELEASE_VERSION}}"
           kube-prometheus-stack.grafana.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           kube-prometheus-stack.grafana.adminPassword: "{{.GRAFANA_PASSWORD}}"
+          kube-prometheus-stack.prometheus.thanosIngress.hosts[0]: "{{.AWS_REGION}}.thanos.{{.DOMAIN}}"
+          kube-prometheus-stack.prometheus.thanosIngress.tls[0].hosts[0]: "{{.AWS_REGION}}.thanos.{{.DOMAIN}}"
           thanos.query.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.queryFrontend.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.compactor.enabled: "{{.IS_PRIMARY_CLUSTER}}"

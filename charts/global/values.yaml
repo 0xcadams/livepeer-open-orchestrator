@@ -71,6 +71,17 @@ kube-prometheus-stack:
       enabled: true
     thanosServiceMonitor:
       enabled: true
+    thanosIngress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
+      hosts:
+        - changeme.com
+      tls:
+        - hosts:
+            - changeme.com
+          secretName: "global-thanos-ingress-tls-secret"
 
 thanos:
   existingObjstoreSecret: "thanos-config"
@@ -108,7 +119,7 @@ prometheus-json-exporter:
   serviceMonitor:
     enabled: true
     targets:
-      - name: stream-scores                   
+      - name: stream-scores
         url: https://changeme.com
   configuration:
     config: |
