@@ -44,6 +44,7 @@ jobs:
           helm repo add thanos https://charts.bitnami.com/bitnami
 
           yarn deploy:eks:virginia
+          yarn deploy:eks:frankfurt
         env:
           PROJECT_NAME: "livepeer-open-orchestrator"
           IS_PRIMARY_CLUSTER: "false"

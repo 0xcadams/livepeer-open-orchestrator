@@ -54,7 +54,11 @@ yarn install
 
 Copy the `.env.example` to `.env` and modify the values. Many of the values are documented and/or straightforward. However, a few will need extra steps to configure.
 
-The `DOMAIN` you configure will need to be imported into your AWS account to be managed in Route53. This domain will be used and subdomains will be created under it for the RPC endpoint and Grafana.
+The `DOMAIN` you configure will need to be imported into your AWS account to be managed in Route53. This domain will be used and subdomains will be created under it for the RPC endpoint and Grafana. To [create the hosted zone](https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md) in Route53, run:
+
+```bash
+aws route53 create-hosted-zone --name "domain.xyz." --caller-reference "external-dns-$(date +%s)"
+```
 
 The `ETH_ADDRESS` is the public address of your orchestrator - it will have to be generated from a private key. If you have already registered as an orchestrator before, you can use this public address. If not, use the following commands to generate a new public/private key:
 
@@ -79,7 +83,12 @@ The passwords used in the config should be unique, long, and randomly generated.
 
 ### Cluster Creation
 
-If you would like to create EKS clusters (and not use another provider), continue with this section.
+If you would like to create EKS clusters (and not use another provider), continue with this section. You'll first need to install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and [eksctl](https://eksctl.io/introduction/):
+
+```bash
+brew tap weaveworks/tap
+brew install weaveworks/tap/eksctl
+```
 
 Create the EKS cluster in the "main" region which you have defined (in this repo, we have defined `us-east-1` or Virginia as the main region).
 
@@ -88,12 +97,25 @@ aws configure
 yarn create:eks:virginia
 ```
 
-This will set up AWS credentials locally and use `eksctl` to create an EKS cluster.
+This will [set up AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) locally and use `eksctl` to create an EKS cluster. You will be able to see the new cluster in `us-east-1` your [EKS dashboard](https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/clusters).
+
+You will also need to create an S3 bucket to hold the Thanos historical metrics (which allows metrics to be shared between regional clusters).
+
+```bash
+aws s3api create-bucket --bucket $PROJECT_NAME --region us-east-1 --acl private
+```
+
+This will create an S3 bucket with the project name as the title, which is necessary for Thanos to use when querying/writing metrics to storage.
 
 ### Secret Creation
 
 ```bash
 > kubectl create secret generic json-private-key --from-file=key.json=key.json
+```
+
+```bash
+htpasswd -c auth orchestrator
+kubectl create secret generic rpc-auth --from-file=auth
 ```
 
 More docs coming soon...
