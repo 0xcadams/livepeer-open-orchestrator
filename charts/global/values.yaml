@@ -82,9 +82,9 @@ kube-prometheus-stack:
       hosts:
         - changeme.com
       tls:
-        - hosts:
+        - secretName: "global-thanos-ingress-tls-secret"
+          hosts:
             - changeme.com
-          secretName: "global-thanos-ingress-tls-secret"
 
 thanos:
   existingObjstoreSecret: "thanos-config"
