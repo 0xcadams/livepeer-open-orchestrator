@@ -10,12 +10,12 @@ dependencies:
   version: 4.1.1
 - name: kube-prometheus-stack
   repository: https://prometheus-community.github.io/helm-charts
-  version: 35.4.2
+  version: 35.5.1
 - name: prometheus-json-exporter
   repository: https://prometheus-community.github.io/helm-charts
   version: 0.2.1
 - name: thanos
   repository: https://charts.bitnami.com/bitnami
   version: 10.5.0
-digest: sha256:34b763c378275db6daccb220984682280939919129b57c0fb0060ee6e160b7b0
-generated: "2022-06-07T20:11:52.513626-07:00"
+digest: sha256:e1d9c9117eef390d979fe48a7f4e55755d3b432a70f5f4d43586bae08fe21a5f
+generated: "2022-06-08T19:33:47.954431-07:00"

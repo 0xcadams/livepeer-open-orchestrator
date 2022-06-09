@@ -59,6 +59,9 @@ kube-prometheus-stack:
                   values:
                     - general-1
   prometheus:
+    prometheusOperator:
+      thanosImage:
+        tag: v0.26.0
     prometheusSpec:
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
@@ -90,11 +93,13 @@ thanos:
   existingObjstoreSecret: "thanos-config"
   query:
     enabled: false
-    existingSDConfigmap: "global-thanos-sd"
     dnsDiscovery:
-      enabled: false
+      enabled: true
       sidecarsService: "global-kube-prometheus-sta-thanos-discovery"
       sidecarsNamespace: "default"
+      stores:
+        - "dnssrv+_grpc._tcp.global-kube-prometheus-sta-thanos-discovery.default.svc.cluster.local"
+        - "eu-central-1.thanos.livepeer.0xcadams.xyz:443"
   queryFrontend:
     enabled: false
   compactor:
