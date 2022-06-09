@@ -82,7 +82,7 @@ kube-prometheus-stack:
       hosts:
         - changeme.com
       tls:
-        - secretName: "global-thanos-ingress-tls-secret"
+        - secretName: global-thanos-ingress-tls-secret
           hosts:
             - changeme.com
 
