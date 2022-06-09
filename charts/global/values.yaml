@@ -8,6 +8,7 @@ global:
   allRegions:
     - "us-east-1"
     - "eu-central-1"
+    - "ap-southeast-1"
 
 cert-manager:
   installCRDs: true
@@ -100,6 +101,7 @@ thanos:
       stores:
         - "dnssrv+_grpc._tcp.global-kube-prometheus-sta-thanos-discovery.default.svc.cluster.local"
         - "eu-central-1.thanos.livepeer.0xcadams.xyz:443"
+        - "ap-southeast-1.thanos.livepeer.0xcadams.xyz:443"
   queryFrontend:
     enabled: false
   compactor:
