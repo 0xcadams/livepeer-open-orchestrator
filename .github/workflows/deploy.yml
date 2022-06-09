@@ -45,6 +45,7 @@ jobs:
 
           yarn deploy:eks:virginia
           yarn deploy:eks:frankfurt
+          yarn deploy:eks:singapore
         env:
           PROJECT_NAME: "livepeer-open-orchestrator"
           IS_PRIMARY_CLUSTER: "false"
