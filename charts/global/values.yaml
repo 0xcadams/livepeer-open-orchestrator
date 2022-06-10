@@ -8,7 +8,6 @@ global:
   allRegions:
     - "us-east-1"
     - "eu-central-1"
-    - "ap-southeast-1"
 
 thanos:
   existingObjstoreSecret: "thanos-config"
@@ -19,7 +18,6 @@ thanos:
     stores:
       - "dnssrv+_grpc._tcp.global-kube-prometheus-sta-thanos-discovery.default.svc.cluster.local"
       - "eu-central-1.thanos.livepeer.0xcadams.xyz:10901"
-      - "ap-southeast-1.thanos.livepeer.0xcadams.xyz:10901"
   queryFrontend:
     enabled: false
   compactor:
