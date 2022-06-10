@@ -10,6 +10,38 @@ global:
     - "eu-central-1"
     - "ap-southeast-1"
 
+thanos:
+  existingObjstoreSecret: "thanos-config"
+  query:
+    enabled: false
+    dnsDiscovery:
+      enabled: false
+    stores:
+      - "dnssrv+_grpc._tcp.global-kube-prometheus-sta-thanos-discovery.default.svc.cluster.local"
+      - "eu-central-1.thanos.livepeer.0xcadams.xyz:10901"
+      - "ap-southeast-1.thanos.livepeer.0xcadams.xyz:10901"
+  queryFrontend:
+    enabled: false
+  compactor:
+    enabled: false
+  storegateway:
+    enabled: false
+  ruler:
+    enabled: false
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: alpha.eksctl.io/nodegroup-name
+                operator: In
+                values:
+                  - general-1
+
 cert-manager:
   installCRDs: true
   prometheus:
@@ -83,46 +115,16 @@ kube-prometheus-stack:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
+        nginx.ingress.kubernetes.io/backend-protocol: GRPC
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/grpc-backend: "true"
+        nginx.ingress.kubernetes.io/protocol: h2c
       hosts:
         - changeme.com
       tls:
         - secretName: global-thanos-ingress-tls-secret
           hosts:
             - changeme.com
-
-thanos:
-  existingObjstoreSecret: "thanos-config"
-  query:
-    enabled: false
-    dnsDiscovery:
-      enabled: true
-      sidecarsService: "global-kube-prometheus-sta-thanos-discovery"
-      sidecarsNamespace: "default"
-      stores:
-        - "dnssrv+_grpc._tcp.global-kube-prometheus-sta-thanos-discovery.default.svc.cluster.local"
-        - "eu-central-1.thanos.livepeer.0xcadams.xyz:443"
-        - "ap-southeast-1.thanos.livepeer.0xcadams.xyz:443"
-  queryFrontend:
-    enabled: false
-  compactor:
-    enabled: false
-  storegateway:
-    enabled: false
-  ruler:
-    enabled: false
-  metrics:
-    enabled: true
-    serviceMonitor:
-      enabled: true
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: alpha.eksctl.io/nodegroup-name
-                operator: In
-                values:
-                  - general-1
 
 prometheus-json-exporter:
   enabled: false
@@ -250,8 +252,10 @@ prometheus-json-exporter:
 
 ingress-nginx:
   # this configures the nginx pod to listen to port 8935 and forward to our orchestrator service
+  # and 10901 to forward to thanos
   tcp:
     8935: "default/orchestrator:8935"
+    10901: "default/global-kube-prometheus-sta-thanos-discovery:10901"
   controller:
     metrics:
       enabled: true
