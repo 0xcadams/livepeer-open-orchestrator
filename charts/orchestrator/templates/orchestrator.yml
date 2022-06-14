@@ -45,7 +45,7 @@ spec:
             - -ethOrchAddr=$(ETH_ORCH_ADDR)
             - -pricePerUnit=$(PRICE_PER_UNIT)
             - -blockPollingInterval=$(BLOCK_POLLING_INTERVAL)
-            - -maxFaceValue=$(MAX_FACE_VALUE)
+            # - -maxFaceValue=$(MAX_FACE_VALUE)
           env:
             - name: ETH_PASSWORD
               valueFrom:
