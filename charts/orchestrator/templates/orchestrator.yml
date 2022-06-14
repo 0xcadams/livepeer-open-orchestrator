@@ -17,9 +17,10 @@ spec:
     spec:
       affinity:
         nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
                   - key: alpha.eksctl.io/nodegroup-name
                     operator: In
                     values:
@@ -60,7 +61,7 @@ spec:
             - name: ETH_URL
               value: "http://arbitrum-nginx-proxy:8555"
             - name: REWARD
-              value: "false"
+              value: "{{ .Values.orchestrator.reward }}"
             - name: NVIDIA
               value: "all"
             - name: MAX_SESSIONS
@@ -80,9 +81,11 @@ spec:
             requests:
               memory: 1Gi
               cpu: '1000m'
+              nvidia.com/gpu: 1
             limits:
               memory: 4Gi
               cpu: '2000m'
+              nvidia.com/gpu: 1
           livenessProbe:
             httpGet:
               path: /status

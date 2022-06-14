@@ -14,7 +14,8 @@ orchestrator:
   version: "0.5.32-d1e18680"
   pricePerUnit: 1100
   blockPollingInterval: 15
-  reward: 'false'
+  reward: "false"
   maxFaceValue: 10000000000000000
 
-  jsonWalletPassword: changeme
+  primaryJsonWalletPassword: changeme
+  secondaryJsonWalletPassword: changeme

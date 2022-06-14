@@ -17,3 +17,15 @@ http://titan-node-orch.com:3000/d/Titan-World-Total/titan-node-all-orchs-total?o
 https://grafana.stronk.tech/d/71b6OZ0Gz/orchestrator-overview?orgId=1&refresh=5s&theme=dark
 
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+
+
+https://rancher.com/docs/k3s/latest/en/quick-start/
+
+```
+cat /etc/rancher/k3s/k3s.yaml
+```
+
+KUBE_CONFIG_CALIFORNIA
+
+https://github.com/NVIDIA/nvidia-container-runtime

@@ -32,9 +32,10 @@ thanos:
       enabled: true
   affinity:
     nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
               - key: alpha.eksctl.io/nodegroup-name
                 operator: In
                 values:
@@ -50,13 +51,17 @@ cert-manager:
         release: "global"
   affinity:
     nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
               - key: alpha.eksctl.io/nodegroup-name
                 operator: In
                 values:
                   - general-1
+
+nvidia-device-plugin:
+  allowDefaultNamespace: true
 
 letsencrypt:
   email: me@changeme.com
@@ -82,9 +87,10 @@ kube-prometheus-stack:
         url: http://global-thanos-query-frontend:9090
     affinity:
       nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
                 - key: alpha.eksctl.io/nodegroup-name
                   operator: In
                   values:
