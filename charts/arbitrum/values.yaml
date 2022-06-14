@@ -7,7 +7,7 @@ global:
   region: changeme
 
 arbitrum:
-  version: changeme
+  version: "v1.4.0-f4bbe91"
   infuraProjectId: changeme
   ftkuhnsmanApiKey: changeme
   rpc:

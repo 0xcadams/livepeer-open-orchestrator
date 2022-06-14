@@ -7,4 +7,4 @@ global:
   region: changeme
 
 geth:
-  version: changeme
+  version: "v1.10.18"

@@ -13,7 +13,6 @@ deploy:
           global.projectName: "{{.PROJECT_NAME}}"
           global.region: "{{.AWS_REGION}}"
           global.domain: "{{.DOMAIN}}"
-          geth.version: "{{.GETH_VERSION}}"
           geth.region: "{{.AWS_REGION}}"
       - name: arbitrum
         createNamespace: true
@@ -24,7 +23,6 @@ deploy:
           global.projectName: "{{.PROJECT_NAME}}"
           global.region: "{{.AWS_REGION}}"
           global.domain: "{{.DOMAIN}}"
-          arbitrum.version: "{{.ARBITRUM_VERSION}}"
           arbitrum.infuraProjectId: "{{.INFURA_PROJECT_ID}}"
           arbitrum.ftkuhnsmanApiKey: "{{.FTKUHNSMAN_API_KEY}}"
           arbitrum.rpc.username: "{{.RPC_BASIC_AUTH_USERNAME}}"
@@ -64,7 +62,6 @@ deploy:
           global.region: "{{.AWS_REGION}}"
           global.domain: "{{.DOMAIN}}"
           orchestrator.ethAddress: "{{.ETH_ADDRESS}}"
-          orchestrator.version: "{{.LIVEPEER_VERSION}}"
           orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"
           orchestrator.reward: "{{.REWARD}}"
           orchestrator.jsonWalletPassword: "{{.JSON_WALLET_PASSWORD}}"
