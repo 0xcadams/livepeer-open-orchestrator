@@ -4,6 +4,32 @@ kind: Config
 deploy:
   helm:
     releases:
+      - name: global
+        createNamespace: true
+        chartPath: charts/global
+        setValueTemplates:
+          global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
+          global.releaseVersion: "{{.RELEASE_VERSION}}"
+          global.projectName: "{{.PROJECT_NAME}}"
+          global.region: "{{.AWS_REGION}}"
+          global.domain: "{{.DOMAIN}}"
+          external-dns.txtPrefix: "{{.AWS_REGION}}."
+          external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
+          letsencrypt.email: "{{.SUPPORT_EMAIL}}"
+          nvidia-device-plugin.enabled: "{{.IS_K3S}}"
+          prometheus-json-exporter.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          prometheus-json-exporter.serviceMonitor.targets[0].url: "https://leaderboard-serverless.vercel.app/api/raw_stats?orchestrator={{.ETH_ADDRESS}}"
+          kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.region: "{{.AWS_REGION}}"
+          kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.version: "{{.RELEASE_VERSION}}"
+          kube-prometheus-stack.grafana.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          kube-prometheus-stack.grafana.adminPassword: "{{.GRAFANA_PASSWORD}}"
+          kube-prometheus-stack.prometheus.thanosIngress.hosts[0]: "{{.AWS_REGION}}.thanos.{{.DOMAIN}}"
+          kube-prometheus-stack.prometheus.thanosIngress.tls[0].hosts[0]: "{{.AWS_REGION}}.thanos.{{.DOMAIN}}"
+          kube-prometheus-stack.prometheus.thanosIngress.tls[0].secretName: "global-thanos-ingress-tls-secret"
+          thanos.query.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          thanos.queryFrontend.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          thanos.compactor.enabled: "{{.IS_PRIMARY_CLUSTER}}"
+          thanos.storegateway.enabled: "{{.IS_PRIMARY_CLUSTER}}"
       - name: geth
         createNamespace: true
         chartPath: charts/geth
@@ -29,31 +55,6 @@ deploy:
           arbitrum.ftkuhnsmanApiKey: "{{.FTKUHNSMAN_API_KEY}}"
           arbitrum.rpc.username: "{{.RPC_BASIC_AUTH_USERNAME}}"
           arbitrum.rpc.password: "{{.RPC_BASIC_AUTH_PASSWORD}}"
-      - name: global
-        createNamespace: true
-        chartPath: charts/global
-        setValueTemplates:
-          global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
-          global.releaseVersion: "{{.RELEASE_VERSION}}"
-          global.projectName: "{{.PROJECT_NAME}}"
-          global.region: "{{.AWS_REGION}}"
-          global.domain: "{{.DOMAIN}}"
-          external-dns.txtPrefix: "{{.AWS_REGION}}."
-          external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
-          letsencrypt.email: "{{.SUPPORT_EMAIL}}"
-          prometheus-json-exporter.enabled: "{{.IS_PRIMARY_CLUSTER}}"
-          prometheus-json-exporter.serviceMonitor.targets[0].url: "https://leaderboard-serverless.vercel.app/api/raw_stats?orchestrator={{.ETH_ADDRESS}}"
-          kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.region: "{{.AWS_REGION}}"
-          kube-prometheus-stack.prometheus.prometheusSpec.externalLabels.version: "{{.RELEASE_VERSION}}"
-          kube-prometheus-stack.grafana.enabled: "{{.IS_PRIMARY_CLUSTER}}"
-          kube-prometheus-stack.grafana.adminPassword: "{{.GRAFANA_PASSWORD}}"
-          kube-prometheus-stack.prometheus.thanosIngress.hosts[0]: "{{.AWS_REGION}}.thanos.{{.DOMAIN}}"
-          kube-prometheus-stack.prometheus.thanosIngress.tls[0].hosts[0]: "{{.AWS_REGION}}.thanos.{{.DOMAIN}}"
-          kube-prometheus-stack.prometheus.thanosIngress.tls[0].secretName: "global-thanos-ingress-tls-secret"
-          thanos.query.enabled: "{{.IS_PRIMARY_CLUSTER}}"
-          thanos.queryFrontend.enabled: "{{.IS_PRIMARY_CLUSTER}}"
-          thanos.compactor.enabled: "{{.IS_PRIMARY_CLUSTER}}"
-          thanos.storegateway.enabled: "{{.IS_PRIMARY_CLUSTER}}"
       - name: orchestrator
         createNamespace: true
         chartPath: charts/orchestrator
@@ -66,5 +67,6 @@ deploy:
           orchestrator.ethAddress: "{{.ETH_ADDRESS}}"
           orchestrator.version: "{{.LIVEPEER_VERSION}}"
           orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"
-          orchestrator.reward: "{{.REWARD}}"
-          orchestrator.jsonWalletPassword: "{{.JSON_WALLET_PASSWORD}}"
+          orchestrator.reward: "{{.IS_PRIMARY_CLUSTER}}"
+          orchestrator.primaryJsonWalletPassword: "{{.PRIMARY_JSON_WALLET_PASSWORD}}"
+          orchestrator.secondaryJsonWalletPassword: "{{.SECONDARY_JSON_WALLET_PASSWORD}}"
