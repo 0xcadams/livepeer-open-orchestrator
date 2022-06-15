@@ -76,7 +76,7 @@ thanos:
               - key: alpha.eksctl.io/nodegroup-name
                 operator: In
                 values:
-                  - general-1
+                  - general-2
 
 cert-manager:
   installCRDs: true
@@ -104,7 +104,7 @@ cert-manager:
               - key: alpha.eksctl.io/nodegroup-name
                 operator: In
                 values:
-                  - general-1
+                  - general-2
 
 nvidia-device-plugin:
   allowDefaultNamespace: true
@@ -151,7 +151,7 @@ kube-prometheus-stack:
                 - key: alpha.eksctl.io/nodegroup-name
                   operator: In
                   values:
-                    - general-1
+                    - general-2
   prometheus:
     prometheusOperator:
       thanosImage:

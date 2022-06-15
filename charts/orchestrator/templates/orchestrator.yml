@@ -24,7 +24,7 @@ spec:
                   - key: alpha.eksctl.io/nodegroup-name
                     operator: In
                     values:
-                      - nvidia-1
+                      - nvidia-2
       containers:
         - name: "{{ .Chart.Name }}"
           image: "livepeer/go-livepeer:{{ .Values.orchestrator.version }}"

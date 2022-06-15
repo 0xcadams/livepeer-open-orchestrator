@@ -6,8 +6,8 @@ metadata:
   name: "{{ projectName }}"
   region: "{{ region }}"
 
-managedNodeGroups:
-  - name: "nvidia-1"
+nodeGroups:
+  - name: "nvidia-2"
     instanceType: "g4dn.xlarge"
     desiredCapacity: 1
     volumeSize: 80
@@ -16,7 +16,7 @@ managedNodeGroups:
     iam:
       withAddonPolicies:
         autoScaler: true
-  - name: "general-1"
+  - name: "general-2"
     instanceType: "t3.small"
     desiredCapacity: {{ generalPodCapacity }}
     volumeSize: 80
@@ -25,7 +25,7 @@ managedNodeGroups:
     iam:
       withAddonPolicies:
         autoScaler: true
-  - name: "large-1"
+  - name: "large-3"
     instanceType: "t3a.xlarge"
     desiredCapacity: {{ largePodCapacity }}
     volumeSize: 80

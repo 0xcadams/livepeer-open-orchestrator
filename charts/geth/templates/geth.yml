@@ -25,7 +25,7 @@ spec:
                   - key: alpha.eksctl.io/nodegroup-name
                     operator: In
                     values:
-                      - large-1
+                      - large-3
       containers:
         - name: {{ .Chart.Name }}
           image: "ethereum/client-go:{{ .Values.geth.version }}"
