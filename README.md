@@ -7,7 +7,7 @@
 
 <h3>livepeer-open-orchestrator</h3>
 
-Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, using Helm and EKS.
+Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, using k3s, Helm and EKS.
 
 <p>
   <a href="https://explorer.livepeer.org/accounts/0xfc9122f12b23d89a33f7e073072b9bf60aab3fa4/orchestrating">
@@ -24,8 +24,8 @@ Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, 
 ## Features
 
 - 🚀 Automated deployment to Kubernetes using Github Actions
+- 📦 Easily integrate single-node `k3s` clusters with centralized Kubernetes providers
 - 👟 Built on Helm for easy, portable deployment
-- 📦 Easily migrate to alternative Kubernetes providers (or `minikube` for non-centralized providers)
 - 🌀 Configured using a single `.env` file and minimal manual steps
 - 🦄 Inspired by best practices from the top Livepeer orchestrators
 
