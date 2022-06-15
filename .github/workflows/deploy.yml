@@ -32,7 +32,7 @@ jobs:
       - name: Deploy with Skaffold
         run: |
           export KUBECONFIG="${KUBECONFIG}:./kube-config-california"
-          echo $KUBE_CONFIG_CALIFORNIA >> ./kube-config-california
+          echo $KUBE_CONFIG_CALIFORNIA_B64 | base64 -d > ./kube-config-california
 
           curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
           sudo install skaffold /usr/local/bin/
@@ -54,7 +54,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-          KUBE_CONFIG_CALIFORNIA: ${{ secrets.KUBE_CONFIG_CALIFORNIA }}
+          KUBE_CONFIG_CALIFORNIA_B64: ${{ secrets.KUBE_CONFIG_CALIFORNIA_B64 }}
 
           PROJECT_NAME: "livepeer-open-orchestrator"
           PRICE_PER_UNIT: "1111"
