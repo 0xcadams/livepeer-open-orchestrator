@@ -13,6 +13,8 @@ deploy:
           global.projectName: "{{.PROJECT_NAME}}"
           global.region: "{{.AWS_REGION}}"
           global.domain: "{{.DOMAIN}}"
+          global.awsAccessKeyId: "{{.AWS_ACCESS_KEY_ID}}"
+          global.awsSecretAccessKey: "{{.AWS_SECRET_ACCESS_KEY}}"
           external-dns.txtPrefix: "{{.AWS_REGION}}."
           external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
           letsencrypt.email: "{{.SUPPORT_EMAIL}}"

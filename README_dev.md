@@ -18,8 +18,6 @@ https://grafana.stronk.tech/d/71b6OZ0Gz/orchestrator-overview?orgId=1&refresh=5s
 
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
-
-
 https://rancher.com/docs/k3s/latest/en/quick-start/
 
 ```
@@ -29,3 +27,41 @@ cat /etc/rancher/k3s/k3s.yaml
 KUBE_CONFIG_CALIFORNIA
 
 https://github.com/NVIDIA/nvidia-container-runtime
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::livepeer-open-orchestrator",
+        "arn:aws:s3:::livepeer-open-orchestrator/*"
+      ],
+      "Effect": "Allow"
+    },
+    {
+      "Action": [
+        "route53:ListHostedZones",
+        "route53:ListResourceRecordSets",
+        "route53:ListTagsForResource",
+        "route53:ListHostedZonesByName"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    },
+    {
+      "Action": ["route53:ChangeResourceRecordSets"],
+      "Resource": "arn:aws:route53:::hostedzone/*",
+      "Effect": "Allow"
+    },
+    {
+      "Action": ["route53:GetChange"],
+      "Resource": "arn:aws:route53:::change/*",
+      "Effect": "Allow"
+    }
+  ]
+}
+```
+
+curl -sfL https://get.k3s.io | sh -s - --docker --node-ip xxx.xxx.xxx.xxx

@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}
+  name: "{{ .Chart.Name }}"
   labels:
-    app: {{ .Chart.Name }}
+    app: "{{ .Chart.Name }}"
 spec:
   replicas: {{ .Values.orchestrator.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: "{{ .Chart.Name }}"
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: "{{ .Chart.Name }}"
     spec:
       affinity:
         nodeAffinity:
@@ -26,7 +26,7 @@ spec:
                     values:
                       - nvidia-1
       containers:
-        - name: {{ .Chart.Name }}
+        - name: "{{ .Chart.Name }}"
           image: "livepeer/go-livepeer:{{ .Values.orchestrator.version }}"
           args:
             - -v=6

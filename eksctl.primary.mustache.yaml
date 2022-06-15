@@ -16,17 +16,6 @@ managedNodeGroups:
     iam:
       withAddonPolicies:
         autoScaler: true
-        externalDNS: true
-        certManager: true
-      # attach policy for metrics s3 storage
-      attachPolicy:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Action: "s3:*"
-            Resource:
-              - "arn:aws:s3:::{{ projectName }}"
-              - "arn:aws:s3:::{{ projectName }}/*"
   - name: "general-1"
     instanceType: "t3.small"
     desiredCapacity: {{ generalPodCapacity }}
@@ -36,17 +25,6 @@ managedNodeGroups:
     iam:
       withAddonPolicies:
         autoScaler: true
-        externalDNS: true
-        certManager: true
-      # attach policy for metrics s3 storage
-      attachPolicy:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Action: "s3:*"
-            Resource:
-              - "arn:aws:s3:::{{ projectName }}"
-              - "arn:aws:s3:::{{ projectName }}/*"
   - name: "large-1"
     instanceType: "t3a.xlarge"
     desiredCapacity: {{ largePodCapacity }}
@@ -56,14 +34,3 @@ managedNodeGroups:
     iam:
       withAddonPolicies:
         autoScaler: true
-        externalDNS: true
-        certManager: true
-      # attach policy for metrics s3 storage
-      attachPolicy:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Action: "s3:*"
-            Resource:
-              - "arn:aws:s3:::{{ projectName }}"
-              - "arn:aws:s3:::{{ projectName }}/*"

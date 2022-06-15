@@ -4,7 +4,6 @@ kind: ServiceMonitor
 metadata:
   name: "{{ .Chart.Name }}-monitor"
   labels:
-    release: "global"
     version: "{{ .Values.global.releaseVersion }}"
 spec:
   selector:
