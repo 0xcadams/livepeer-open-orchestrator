@@ -56,7 +56,7 @@ spec:
               memory: 2G
               cpu: '1500m'
             limits:
-              memory: 7G
+              memory: 9G
               cpu: '2000m'
           volumeMounts:
             - name: arb-datadir
