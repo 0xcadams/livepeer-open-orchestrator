@@ -41,7 +41,7 @@ spec:
             - -nvidia=all
             - -ethUrl=http://arbitrum-nginx-proxy:8555
             {{- if not .Values.orchestrator.reward }}
-            - reward=false
+            - -reward=false
             {{- end }}
             - -ethPassword=$(ETH_PASSWORD)
             - -ethOrchAddr={{ .Values.orchestrator.ethAddress }}
