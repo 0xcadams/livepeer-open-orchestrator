@@ -49,15 +49,6 @@ spec:
             limits:
               memory: 8G
               cpu: '4000m'
-          # readinessProbe:
-          #   exec:
-          #     command:
-          #     - sh
-          #     - -c
-          #     - '[ "`geth attach --exec "eth.syncing"`" = "false" ]'
-          #   initialDelaySeconds: 360
-          #   periodSeconds: 30
-          #   failureThreshold: 1000
           volumeMounts:
             - name: geth-datadir
               mountPath: /root

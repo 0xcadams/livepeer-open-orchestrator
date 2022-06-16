@@ -32,16 +32,16 @@ deploy:
           thanos.queryFrontend.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.compactor.enabled: "{{.IS_PRIMARY_CLUSTER}}"
           thanos.storegateway.enabled: "{{.IS_PRIMARY_CLUSTER}}"
-      - name: geth
-        createNamespace: true
-        chartPath: charts/geth
-        setValueTemplates:
-          global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
-          global.releaseVersion: "{{.RELEASE_VERSION}}"
-          global.projectName: "{{.PROJECT_NAME}}"
-          global.region: "{{.AWS_REGION}}"
-          global.domain: "{{.DOMAIN}}"
-          geth.region: "{{.AWS_REGION}}"
+      # - name: geth
+      #   createNamespace: true
+      #   chartPath: charts/geth
+      #   setValueTemplates:
+      #     global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
+      #     global.releaseVersion: "{{.RELEASE_VERSION}}"
+      #     global.projectName: "{{.PROJECT_NAME}}"
+      #     global.region: "{{.AWS_REGION}}"
+      #     global.domain: "{{.DOMAIN}}"
+      #     geth.region: "{{.AWS_REGION}}"
       - name: arbitrum
         createNamespace: true
         chartPath: charts/arbitrum
