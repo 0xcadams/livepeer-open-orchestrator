@@ -85,9 +85,9 @@ The passwords used in the config should be unique, long, and randomly generated.
 
 ### Cluster Creation
 
-#### EKS
+#### k3s (Self-Hosted Kubernetes)
 
-If you would like to create K3S clusters, continue with this section. You'll first need to install [k3s](https://rancher.com/docs/k3s/latest/en/quick-start/) on the node which you would like to use as your main server. You must configure `k3s` to use Docker in order to take advantage of the NVIDIA container runtime by following the [runtime installation guide](https://github.com/NVIDIA/nvidia-container-runtime#installation). You will need to make sure to add the `default-runtime` to `/etc/docker/daemon.json`. Once that is complete, you can use:
+If you would like to create `k3s` clusters, continue with this section. You'll first need to install [k3s](https://rancher.com/docs/k3s/latest/en/quick-start/) on the node which you would like to use as your main server. You must configure `k3s` to use Docker in order to take advantage of the NVIDIA container runtime by following the [runtime installation guide](https://github.com/NVIDIA/nvidia-container-runtime#installation). You will need to make sure to add the `default-runtime` to `/etc/docker/daemon.json`. Once that is complete, you can use:
 
 ```bash
 curl -sfL https://get.k3s.io | sh -s - --docker --node-ip xxx.xxx.xxx.xxx
@@ -101,7 +101,7 @@ The `/etc/rancher/k3s/k3s.yaml` config can be used to connect remotely (just be 
 
 You should be able to use this [kubeconfig](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) to connect to the node and deploy the Kubernetes charts!
 
-#### EKS
+#### EKS (Managed Kubernetes)
 
 If you would like to create EKS clusters (and not use another provider), continue with this section. You'll first need to install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and [eksctl](https://eksctl.io/introduction/):
 
