@@ -29,6 +29,7 @@ nodeGroups:
     instanceType: "t3a.xlarge"
     desiredCapacity: {{ largePodCapacity }}
     volumeSize: 80
+    availabilityZones: ["us-east-1b"]
     labels:
       nvidia: "false"
     iam:

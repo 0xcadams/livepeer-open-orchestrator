@@ -3,18 +3,18 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Chart.Name }}
+  name: "{{ .Chart.Name }}"
   labels:
-    app: {{ .Chart.Name }}
+    app: "{{ .Chart.Name }}"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: "{{ .Chart.Name }}"
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: "{{ .Chart.Name }}"
     spec:
       securityContext:
         fsGroup: 2000
@@ -24,7 +24,7 @@ spec:
           command: ["/bin/sh","-c"]
           args: ["while [ $(curl -sw '%{http_code}' http://geth:8545 -o /dev/null) -ne 200 ]; do sleep 5; echo 'Waiting...'; done"]
       containers:
-        - name: {{ .Chart.Name }}
+        - name: "{{ .Chart.Name }}"
           image: "offchainlabs/arb-node:{{ .Values.arbitrum.version }}"
           args: ["--l1.url=http://geth:8545"]
           ports:
@@ -61,7 +61,7 @@ spec:
           volumeMounts:
             - name: arb-datadir
               mountPath: /home/user/.arbitrum/mainnet
-  serviceName: {{ .Chart.Name }}
+  serviceName: "{{ .Chart.Name }}"
   podManagementPolicy: Parallel
   volumeClaimTemplates:
     - metadata:

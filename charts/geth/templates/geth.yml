@@ -3,18 +3,18 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Chart.Name }}
+  name: "{{ .Chart.Name }}"
   labels:
-    app: {{ .Chart.Name }}
+    app: "{{ .Chart.Name }}"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: "{{ .Chart.Name }}"
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: "{{ .Chart.Name }}"
     spec:
       affinity:
         nodeAffinity:
@@ -25,9 +25,9 @@ spec:
                   - key: alpha.eksctl.io/nodegroup-name
                     operator: In
                     values:
-                      - large-3
+                      - large-4
       containers:
-        - name: {{ .Chart.Name }}
+        - name: "{{ .Chart.Name }}"
           image: "ethereum/client-go:{{ .Values.geth.version }}"
           command: ["/bin/sh", "-c", "geth --cache 2048 --metrics --metrics.addr 0.0.0.0 --http --http.addr '0.0.0.0' --http.vhosts '*' --http.corsdomain '*' --http.api eth,web3,debug,txpool,net,admin,debug --ws --ws.api eth,web3,debug,txpool,net,admin,debug --ws.origins '*'"]
           ports:
@@ -61,7 +61,7 @@ spec:
           volumeMounts:
             - name: geth-datadir
               mountPath: /root
-  serviceName: {{ .Chart.Name }}
+  serviceName: "{{ .Chart.Name }}"
   podManagementPolicy: Parallel
   volumeClaimTemplates:
     - metadata:

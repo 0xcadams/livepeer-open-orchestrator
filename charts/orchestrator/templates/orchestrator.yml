@@ -30,48 +30,29 @@ spec:
           image: "livepeer/go-livepeer:{{ .Values.orchestrator.version }}"
           args:
             - -v=6
-            - -network=$(NETWORK)
+            - -network={{ .Values.orchestrator.network }}
             - -orchestrator=true
             - -transcoder=true
             - -monitor=true
             - -cliAddr=0.0.0.0:7935
             - -httpAddr=0.0.0.0:8935
-            - -serviceAddr=$(SERVICE_ADDR)
-            - -maxSessions=$(MAX_SESSIONS)
-            - -nvidia=$(NVIDIA)
-            - -ethUrl=$(ETH_URL)
-            - -reward=$(REWARD)
+            - -serviceAddr={{ .Values.global.domain }}:8935
+            - -maxSessions=12
+            - -nvidia=all
+            - -ethUrl=http://arbitrum-nginx-proxy:8555
+            {{- if not .Values.orchestrator.reward }}
+            - reward=false
+            {{- end }}
             - -ethPassword=$(ETH_PASSWORD)
-            - -ethOrchAddr=$(ETH_ORCH_ADDR)
-            - -pricePerUnit=$(PRICE_PER_UNIT)
-            - -blockPollingInterval=$(BLOCK_POLLING_INTERVAL)
-            # - -maxFaceValue=$(MAX_FACE_VALUE)
+            - -ethOrchAddr={{ .Values.orchestrator.ethAddress }}
+            - -pricePerUnit={{ .Values.orchestrator.pricePerUnit }}
+            - -blockPollingInterval={{ .Values.orchestrator.blockPollingInterval }}
           env:
             - name: ETH_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: json-private-key-password
                   key: json-private-key-password
-            - name: ETH_ORCH_ADDR
-              value: "{{ .Values.orchestrator.ethAddress }}"
-            - name: NETWORK
-              value: "{{ .Values.orchestrator.network }}"
-            - name: PRICE_PER_UNIT
-              value: "{{ .Values.orchestrator.pricePerUnit }}"
-            - name: ETH_URL
-              value: "http://arbitrum-nginx-proxy:8555"
-            - name: REWARD
-              value: "{{ .Values.orchestrator.reward }}"
-            - name: NVIDIA
-              value: "all"
-            - name: MAX_SESSIONS
-              value: "10"
-            - name: MAX_FACE_VALUE
-              value: "{{ .Values.orchestrator.maxFaceValue }}"
-            - name: BLOCK_POLLING_INTERVAL
-              value: "{{ .Values.orchestrator.blockPollingInterval }}"
-            - name: SERVICE_ADDR
-              value: "{{ .Values.global.domain }}:8935"
           ports:
             - name: https
               containerPort: 8935
