@@ -54,6 +54,9 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+          NODE_AWS_ACCESS_KEY_ID: ${{ secrets.NODE_AWS_ACCESS_KEY_ID }}
+          NODE_AWS_SECRET_ACCESS_KEY: ${{ secrets.NODE_AWS_SECRET_ACCESS_KEY }}
+
           KUBE_CONFIG_CALIFORNIA_B64: ${{ secrets.KUBE_CONFIG_CALIFORNIA_B64 }}
 
           PROJECT_NAME: "livepeer-open-orchestrator"
