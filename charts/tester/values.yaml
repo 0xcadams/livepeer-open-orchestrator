@@ -7,7 +7,7 @@ global:
   region: changeme
 
 tester:
-  schedule: "0 */1 * * *"
+  schedule: "*/5 * * * *"
   network: arbitrum-one-mainnet
   ethAddress: 0xchangeme
 
