@@ -5,8 +5,11 @@ global:
   projectName: changeme
   domain: changeme
   region: changeme
+
   awsAccessKeyId: changeme
   awsSecretAccessKey: changeme
+  primaryJsonWalletPassword: changeme
+  secondaryJsonWalletPassword: changeme
   allRegions:
     - "us-east-1"
     - "eu-central-1"
