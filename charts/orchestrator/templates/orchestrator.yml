@@ -51,8 +51,8 @@ spec:
             - name: ETH_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: json-private-key-password
-                  key: json-private-key-password
+                  name: json-key-password
+                  key: json-key-password
           ports:
             - name: https
               containerPort: 8935

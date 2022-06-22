@@ -1,4 +1,4 @@
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: "{{ .Chart.Name }}"
@@ -6,8 +6,8 @@ metadata:
     app: "{{ .Chart.Name }}"
 spec:
   schedule: "{{ .Values.tester.schedule }}"
-  successfulJobsHistoryLimit: 5
-  failedJobsHistoryLimit: 5
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
@@ -20,14 +20,14 @@ spec:
                 - name: OT_ETHPASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: json-private-key-password
-                      key: json-private-key-password
+                      name: json-key-password
+                      key: json-key-password
                 - name: OT_REGION
                   value: "{{ .Values.global.region }}"
                 - name: OT_SUBGRAPH
-                  value: "http://localhost:7402"
+                  value: "http://{{ .Chart.Name }}:7402"
                 - name: OT_LEADERBOARD
-                  value: "http://localhost:7402"
+                  value: "http://{{ .Chart.Name }}:7402"
                 - name: OT_LEADERBOARD_SECRET
                   value: ""
                 - name: OT_PROFILES
