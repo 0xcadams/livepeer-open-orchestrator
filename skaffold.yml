@@ -15,6 +15,8 @@ deploy:
           global.domain: "{{.DOMAIN}}"
           global.awsAccessKeyId: "{{.NODE_AWS_ACCESS_KEY_ID}}"
           global.awsSecretAccessKey: "{{.NODE_AWS_SECRET_ACCESS_KEY}}"
+          global.primaryJsonWalletPassword: "{{.PRIMARY_JSON_WALLET_PASSWORD}}"
+          global.secondaryJsonWalletPassword: "{{.SECONDARY_JSON_WALLET_PASSWORD}}"
           external-dns.txtPrefix: "{{.AWS_REGION}}."
           external-dns.txtOwnerId: "{{.PROJECT_NAME}}"
           letsencrypt.email: "{{.SUPPORT_EMAIL}}"
@@ -67,5 +69,14 @@ deploy:
           orchestrator.ethAddress: "{{.ETH_ADDRESS}}"
           orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"
           orchestrator.reward: "{{.IS_PRIMARY_CLUSTER}}"
-          orchestrator.primaryJsonWalletPassword: "{{.PRIMARY_JSON_WALLET_PASSWORD}}"
-          orchestrator.secondaryJsonWalletPassword: "{{.SECONDARY_JSON_WALLET_PASSWORD}}"
+      - name: tester
+        createNamespace: true
+        chartPath: charts/tester
+        setValueTemplates:
+          global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
+          global.releaseVersion: "{{.RELEASE_VERSION}}"
+          global.projectName: "{{.PROJECT_NAME}}"
+          global.region: "{{.AWS_REGION}}"
+          global.domain: "{{.DOMAIN}}"
+          tester.ethAddress: "{{.ETH_ADDRESS}}"
+          tester.maxPricePerUnit: "{{.PRICE_PER_UNIT}}"
