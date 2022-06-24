@@ -101,6 +101,8 @@ The `/etc/rancher/k3s/k3s.yaml` config can be used to connect remotely (just be 
 
 You should be able to use this [kubeconfig](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) to connect to the node and deploy the Kubernetes charts!
 
+You will also need to open up the ports for services running in the cluster - for the secondary clusters, you will need to open `8935`, `10901`. For the main cluster, you will also need `80` and `443`.
+
 #### EKS (Managed Kubernetes)
 
 If you would like to create EKS clusters (and not use another provider), continue with this section. You'll first need to install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and [eksctl](https://eksctl.io/introduction/):
@@ -129,20 +131,30 @@ This will create an S3 bucket with the project name as the title, which is neces
 
 ### Secret Creation
 
+After you create each cluster, you will have to handle some manual secret configuration. Run the following command, replacing `KEY_FILENAME` with either `key.json` (secondary clusters) or `orchestrator.json` (primary cluster which calls reward).
+
 ```bash
-> kubectl create secret generic json-private-key --from-file=key.json=key.json
+kubectl create secret generic json-private-key --from-file=key.json={{KEY_FILENAME}}
 ```
+
+You will also need to create the `rpc-auth` secret in the main cluster, which is used by NGINX to authenticate requests to the Arbitrum node.
 
 ```bash
 htpasswd -c auth orchestrator
 kubectl create secret generic rpc-auth --from-file=auth
 ```
 
-More docs coming soon...
+These are the only secrets you need in manual configuration!
 
 ## Deployment
 
-Docs coming soon...
+To deploy to a cluster, run the following command depending on your desired environment (more environments can be added easily, if you would like to customize the regions to deploy to):
+
+```bash
+yarn deploy:{{region}}
+```
+
+The [CI configuration](.github/workflows/deploy.yml) provides a good example of how deployment works and the dependencies required (Skaffold, Helm, etc).
 
 ## Forking
 
