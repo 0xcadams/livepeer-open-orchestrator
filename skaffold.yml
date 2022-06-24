@@ -69,14 +69,3 @@ deploy:
           orchestrator.ethAddress: "{{.ETH_ADDRESS}}"
           orchestrator.pricePerUnit: "{{.PRICE_PER_UNIT}}"
           orchestrator.reward: "{{.IS_PRIMARY_CLUSTER}}"
-      - name: tester
-        createNamespace: true
-        chartPath: charts/tester
-        setValueTemplates:
-          global.isPrimaryCluster: "{{.IS_PRIMARY_CLUSTER}}"
-          global.releaseVersion: "{{.RELEASE_VERSION}}"
-          global.projectName: "{{.PROJECT_NAME}}"
-          global.region: "{{.AWS_REGION}}"
-          global.domain: "{{.DOMAIN}}"
-          tester.ethAddress: "{{.ETH_ADDRESS}}"
-          tester.maxPricePerUnit: "{{.PRICE_PER_UNIT}}"

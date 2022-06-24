@@ -35,10 +35,3 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: 0xcadams/nvidia-gpu-monitoring:latest,0xcadams/nvidia-gpu-monitoring:${{ steps.tag_version.outputs.RELEASE_VERSION }}
-      - name: Build and push orchestrator tester
-        uses: docker/build-push-action@v3
-        with:
-          context: "{{defaultContext}}:docker/single-orchestrator-subgraph"
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: 0xcadams/single-orchestrator-subgraph:latest,0xcadams/single-orchestrator-subgraph:${{ steps.tag_version.outputs.RELEASE_VERSION }}
