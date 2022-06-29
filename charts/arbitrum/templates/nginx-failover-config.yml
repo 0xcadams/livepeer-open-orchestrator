@@ -27,9 +27,9 @@ data:
       }
 
       upstream rpc2 {
-        server 0.0.0.0:8557;
+        server 0.0.0.0:8558;
 
-        server 0.0.0.0:8558 backup;
+        # server 0.0.0.0:8558 backup;
       }
 
       server {

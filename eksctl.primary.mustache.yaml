@@ -25,13 +25,13 @@ nodeGroups:
     iam:
       withAddonPolicies:
         autoScaler: true
-  # - name: "large-4"
-  #   instanceType: "t3a.xlarge"
-  #   desiredCapacity: {{ largePodCapacity }}
-  #   volumeSize: 80
-  #   availabilityZones: ["us-east-1b"]
-  #   labels:
-  #     nvidia: "false"
-  #   iam:
-  #     withAddonPolicies:
-  #       autoScaler: true
+  - name: "large-5"
+    instanceType: "t3a.2xlarge"
+    desiredCapacity: {{ largePodCapacity }}
+    volumeSize: 80
+    availabilityZones: ["us-east-1b"]
+    labels:
+      nvidia: "false"
+    iam:
+      withAddonPolicies:
+        autoScaler: true
