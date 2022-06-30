@@ -44,11 +44,11 @@ spec:
               protocol: UDP
           resources:
             requests:
-              memory: 4G
-              cpu: '2500m'
+              memory: 7G
+              cpu: '3500m'
             limits:
-              memory: 8G
-              cpu: '4000m'
+              memory: 15G
+              cpu: '6000m'
           volumeMounts:
             - name: geth-datadir
               mountPath: /root

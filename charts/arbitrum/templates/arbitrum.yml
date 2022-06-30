@@ -46,11 +46,11 @@
 #               containerPort: 9642
 #           resources:
 #             requests:
-#               memory: 2G
-#               cpu: '1500m'
+#               memory: 7G
+#               cpu: '3500m'
 #             limits:
 #               memory: 15G
-#               cpu: '2000m'
+#               cpu: '6000m'
 #           volumeMounts:
 #             - name: arb-datadir
 #               mountPath: /home/user/.arbitrum/mainnet
