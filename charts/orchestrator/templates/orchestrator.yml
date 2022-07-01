@@ -47,7 +47,7 @@ spec:
             - -ethOrchAddr={{ .Values.orchestrator.ethAddress }}
             - -pricePerUnit={{ .Values.orchestrator.pricePerUnit }}
             - -blockPollingInterval={{ .Values.orchestrator.blockPollingInterval }}
-            # - -maxFaceValue={{ .Values.orchestrator.maxFaceValue | quote }}
+            - -maxFaceValue={{ .Values.orchestrator.maxFaceValue }}
           env:
             - name: ETH_PASSWORD
               valueFrom:

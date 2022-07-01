@@ -11,8 +11,8 @@ orchestrator:
   network: arbitrum-one-mainnet
   ethAddress: 0xchangeme
 
-  version: "0.5.29"
+  version: "0.5.32"
   pricePerUnit: 1100
   blockPollingInterval: 15
   reward: "false"
-  maxFaceValue: 10000000000000000
+  maxFaceValue: "20000000000000000"
