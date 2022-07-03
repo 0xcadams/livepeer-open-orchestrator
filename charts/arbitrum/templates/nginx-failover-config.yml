@@ -42,7 +42,7 @@ data:
       }
 
       server {
-        listen 0.0.0.0:8555;
+        listen 0.0.0.0:8558;
         location / {
           proxy_pass https://arbitrum-mainnet.infura.io/v3/{{ .Values.arbitrum.infuraProjectId }};
           proxy_set_header Host arbitrum-mainnet.infura.io;
@@ -51,7 +51,7 @@ data:
       }
 
       server {
-        listen 0.0.0.0:855;
+        listen 0.0.0.0:8555;
 
         location / {
           proxy_pass http://rpc2;
