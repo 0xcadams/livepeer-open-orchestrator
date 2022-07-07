@@ -112,7 +112,7 @@
             "uid": "thanos"
           },
           "editorMode": "code",
-          "expr": "sum by(region) (increase(livepeer_tickets_recv[100y]))",
+          "expr": "sum by(geolocation) (increase(livepeer_tickets_recv[100y]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -161,7 +161,9 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -267,7 +269,7 @@
             "uid": "thanos"
           },
           "editorMode": "builder",
-          "expr": "sum by(region) (increase(livepeer_ticket_value_recv[1y])) / 10 ^ 9",
+          "expr": "sum by(geolocation) (increase(livepeer_ticket_value_recv[1y])) / 10 ^ 9",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -316,7 +318,9 @@
         "justifyMode": "center",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -379,7 +383,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -440,7 +445,7 @@
             "uid": "thanos"
           },
           "editorMode": "builder",
-          "expr": "sum by(region) (livepeer_current_sessions_total)",
+          "expr": "sum by(geolocation) (livepeer_current_sessions_total)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -820,13 +825,13 @@
             "uid": "thanos"
           },
           "editorMode": "builder",
-          "expr": "sum by(region) (livepeer_current_sessions_total)",
+          "expr": "sum by(geolocation) (livepeer_current_sessions_total)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Sessions by Region",
+      "title": "Sessions by Location",
       "type": "timeseries"
     },
     {
@@ -875,8 +880,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -966,8 +970,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1003,7 +1006,7 @@
             "uid": "thanos"
           },
           "editorMode": "builder",
-          "expr": "avg by(region) (livepeer_suggested_gas_price)",
+          "expr": "avg by(geolocation) (livepeer_suggested_gas_price)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1011,9 +1014,97 @@
       ],
       "title": "Gas Price",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "thanos"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 40
+      },
+      "id": 230,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "thanos"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(host) (rate(nginx_ingress_controller_requests{status!=\"200\"}[$__rate_interval]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Nginx Errors",
+      "type": "timeseries"
     }
   ],
-  "refresh": "30s",
+  "refresh": "",
   "schemaVersion": 36,
   "style": "dark",
   "tags": [],
@@ -1021,13 +1112,13 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Overview",
   "uid": "Szm1Jwjnk",
-  "version": 27,
+  "version": 29,
   "weekStart": ""
 }

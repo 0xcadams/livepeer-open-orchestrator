@@ -131,10 +131,10 @@ This will create an S3 bucket with the project name as the title, which is neces
 
 ### Secret Creation
 
-After you create each cluster, you will have to handle some manual secret configuration. Run the following command, replacing `KEY_FILENAME` with either `key.json` (secondary clusters) or `orchestrator.json` (primary cluster which calls reward).
+After you create each cluster, you will have to handle some manual secret configuration. Run the following command:
 
 ```bash
-kubectl create secret generic json-private-key --from-file=key.json={{KEY_FILENAME}}
+kubectl create secret generic json-private-key --from-file=key.json=orchestrator.json
 ```
 
 You will also need to create the `rpc-auth` secret in the main cluster, which is used by NGINX to authenticate requests to the Arbitrum node.
@@ -151,7 +151,7 @@ These are the only secrets you need in manual configuration!
 To deploy to a cluster, run the following command depending on your desired environment (more environments can be added easily, if you would like to customize the regions to deploy to):
 
 ```bash
-yarn deploy:{{region}}
+yarn deploy:{{geolocation}}
 ```
 
 The [CI configuration](.github/workflows/deploy.yml) provides a good example of how deployment works and the dependencies required (Skaffold, Helm, etc).

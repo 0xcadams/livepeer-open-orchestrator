@@ -15,16 +15,6 @@ spec:
       labels:
         app: "{{ .Chart.Name }}"
     spec:
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                  - key: alpha.eksctl.io/nodegroup-name
-                    operator: In
-                    values:
-                      - nvidia-2
       containers:
         - name: "{{ .Chart.Name }}"
           image: "livepeer/go-livepeer:{{ .Values.orchestrator.version }}"

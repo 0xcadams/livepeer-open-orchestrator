@@ -4,16 +4,16 @@ global:
   releaseVersion: changeme
   projectName: changeme
   domain: changeme
-  region: changeme
+  geolocation: changeme
 
   awsAccessKeyId: changeme
   awsSecretAccessKey: changeme
+  geolocationAwsRegions:
+    virginia: "us-east-1"
+    frankfurt: "eu-central-1"
+    california: "us-west-1"
+
   primaryJsonWalletPassword: changeme
-  secondaryJsonWalletPassword: changeme
-  allRegions:
-    - "us-east-1"
-    - "eu-central-1"
-    - "us-west-1"
 
 thanos:
   existingObjstoreSecret: "thanos-config"
@@ -23,8 +23,8 @@ thanos:
       enabled: false
     stores:
       - "dnssrv+_grpc._tcp.global-kube-prometheus-sta-thanos-discovery.default.svc.cluster.local"
-      - "eu-central-1.thanos.livepeer.0xcadams.xyz:10901"
-      - "us-west-1.thanos.livepeer.0xcadams.xyz:10901"
+      - "frankfurt.thanos.livepeer.0xcadams.xyz:10901"
+      - "california.thanos.livepeer.0xcadams.xyz:10901"
   queryFrontend:
     enabled: false
   compactor:
@@ -70,16 +70,6 @@ thanos:
     enabled: true
     serviceMonitor:
       enabled: true
-  affinity:
-    nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 1
-          preference:
-            matchExpressions:
-              - key: alpha.eksctl.io/nodegroup-name
-                operator: In
-                values:
-                  - general-2
 
 cert-manager:
   installCRDs: true
@@ -98,16 +88,6 @@ cert-manager:
     enabled: true
     servicemonitor:
       enabled: true
-  affinity:
-    nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 1
-          preference:
-            matchExpressions:
-              - key: alpha.eksctl.io/nodegroup-name
-                operator: In
-                values:
-                  - general-2
 
 nvidia-device-plugin:
   allowDefaultNamespace: true
@@ -145,16 +125,6 @@ kube-prometheus-stack:
       datasources:
         uid: thanos
         url: http://global-thanos-query-frontend:9090
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            preference:
-              matchExpressions:
-                - key: alpha.eksctl.io/nodegroup-name
-                  operator: In
-                  values:
-                    - general-2
   prometheus:
     prometheusOperator:
       thanosImage:
@@ -167,7 +137,7 @@ kube-prometheus-stack:
           key: "objstore.yml"
           name: "thanos-config"
       externalLabels:
-        region: changeme
+        geolocation: changeme
         version: changeme
     thanosService:
       enabled: true

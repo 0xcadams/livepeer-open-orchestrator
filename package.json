@@ -1,27 +1,24 @@
 {
   "name": "livepeer-open-orchestrator",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "description": "Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, using k3s, EKS, and Helm.",
   "private": true,
   "license": "Apache 2.0",
   "scripts": {
     "create:eks:frankfurt": "cross-env AWS_REGION=eu-central-1 IS_PRIMARY_CLUSTER=false IS_K3S=false dotenv yarn prepare:eks && yarn create:eks",
-    "create:eks:singapore": "cross-env AWS_REGION=ap-southeast-1 IS_PRIMARY_CLUSTER=false IS_K3S=false dotenv yarn prepare:eks && yarn create:eks",
     "create:eks:virginia": "cross-env AWS_REGION=us-east-1 IS_PRIMARY_CLUSTER=true IS_K3S=false dotenv yarn prepare:eks && yarn create:eks",
     "create:eks": "eksctl create cluster --config-file=eksctl.yaml",
     "creds:california": "kubectl config use-context california",
     "creds:frankfurt": "cross-env AWS_REGION=eu-central-1 dotenv yarn creds:eks",
-    "creds:singapore": "cross-env AWS_REGION=ap-southeast-1 dotenv yarn creds:eks",
     "creds:virginia": "cross-env AWS_REGION=us-east-1 dotenv yarn creds:eks",
     "creds:eks": "eksctl utils write-kubeconfig --cluster $PROJECT_NAME --region $AWS_REGION",
-    "deploy:california": "yarn creds:california && cross-env AWS_REGION=us-west-1 IS_PRIMARY_CLUSTER=false IS_K3S=true dotenv yarn deploy",
-    "deploy:frankfurt": "yarn creds:frankfurt && cross-env AWS_REGION=eu-central-1 IS_PRIMARY_CLUSTER=false IS_K3S=false dotenv yarn deploy",
-    "deploy:singapore": "yarn creds:singapore && cross-env AWS_REGION=ap-southeast-1 IS_PRIMARY_CLUSTER=false IS_K3S=false dotenv yarn deploy",
-    "deploy:virginia": "yarn creds:virginia && cross-env AWS_REGION=us-east-1 IS_PRIMARY_CLUSTER=true IS_K3S=false dotenv yarn deploy",
+    "deploy:california": "yarn creds:california && cross-env GEOLOCATION=california IS_PRIMARY_CLUSTER=false IS_K3S=true dotenv yarn deploy",
+    "deploy:frankfurt": "yarn creds:frankfurt && cross-env GEOLOCATION=frankfurt IS_PRIMARY_CLUSTER=false IS_K3S=false dotenv yarn deploy",
+    "deploy:virginia": "yarn creds:virginia && cross-env GEOLOCATION=virginia IS_PRIMARY_CLUSTER=true IS_K3S=false dotenv yarn deploy",
     "deploy": "skaffold run",
     "lint": "yarn eslint . --ext .ts && helm lint charts/*",
     "postinstall": "simple-git-hooks",
-    "prepare:eks": "ts-node prepare.ts",
+    "prepare:eks": "ts-node prepare-eksctl.ts",
     "release": "CI=true npx semantic-release"
   },
   "devDependencies": {
@@ -60,7 +57,7 @@
       "path": "git-cz"
     }
   },
-  "packageManager": "yarn@3.1.1",
+  "packageManager": "yarn@3.2.1",
   "release": {
     "branches": [
       "main"

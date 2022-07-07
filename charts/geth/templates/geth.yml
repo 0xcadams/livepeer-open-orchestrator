@@ -16,16 +16,6 @@ spec:
       labels:
         app: "{{ .Chart.Name }}"
     spec:
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                  - key: alpha.eksctl.io/nodegroup-name
-                    operator: In
-                    values:
-                      - large-5
       containers:
         - name: "{{ .Chart.Name }}"
           image: "ethereum/client-go:{{ .Values.geth.version }}"

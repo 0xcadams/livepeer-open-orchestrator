@@ -4,7 +4,7 @@ global:
   releaseVersion: changeme
   projectName: changeme
   domain: changeme
-  region: changeme
+  geolocation: changeme
 
 orchestrator:
   replicaCount: 1

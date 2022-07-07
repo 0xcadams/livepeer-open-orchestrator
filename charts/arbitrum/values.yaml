@@ -4,7 +4,7 @@ global:
   releaseVersion: changeme
   projectName: changeme
   domain: changeme
-  region: changeme
+  geolocation: changeme
 
 arbitrum:
   version: "v1.4.0-f4bbe91"
