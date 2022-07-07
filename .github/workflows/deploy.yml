@@ -60,7 +60,7 @@ jobs:
           KUBE_CONFIG_CALIFORNIA_B64: ${{ secrets.KUBE_CONFIG_CALIFORNIA_B64 }}
 
           PROJECT_NAME: "livepeer-open-orchestrator"
-          PRICE_PER_UNIT: "1198"
+          PRICE_PER_UNIT: "1150"
 
           RELEASE_VERSION: ${{ steps.tag_version.outputs.RELEASE_VERSION }}
 
