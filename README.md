@@ -29,20 +29,25 @@ Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, 
 - 🌀 Configured using a single `.env` file and minimal manual steps
 - 🦄 Inspired by best practices from the top Livepeer orchestrators
 
-## Shoutouts
+## Delegators
 
-Check out the Livepeer orchestrators who support the community and inspired many of the practices baked into this repo:
+The `open-orchestrator.eth` is looking to attract delegator stake in order to get more work on the network!
 
-- [vires-in-numeris](https://explorer.livepeer.org/accounts/0x525419ff5707190389bfb5c87c375d710f5fcb0e/orchestrating)
-- [titan-node](https://explorer.livepeer.org/accounts/0xbe8770603daf200b1fa136ad354ba854928e602b/orchestrating)
-- [authority-null](https://explorer.livepeer.org/accounts/0x9d61ae5875e89036fbf6059f3116d01a22ace3c8/orchestrating)
-- [solarfarm.papa-bear](https://explorer.livepeer.org/accounts/0x10742714f33f3d804e3fa489618b5c3ca12a6df7/orchestrating)
-- [lptnode](https://explorer.livepeer.org/accounts/0x11b04d9a305abe978aeaddc67d9d09aaa4996090/orchestrating)
-- [ftkuhnsman](https://explorer.livepeer.org/accounts/0x4a43b1d7e6227c8b0512e413f406555647ff7bdb/orchestrating)
-- [nightnode](https://explorer.livepeer.org/accounts/0x47a907a0bd1627d71cd14430a721d1550d6d6f58/orchestrating)
-- and more!
+### Performance
 
-## Initial Setup
+There are a few resources for delegators to monitor the current performance for `open-orchestrator.eth`.
+
+- The [`open-orchestrator.eth`](https://explorer.livepeer.org/accounts/0xfc9122f12b23d89a33f7e073072b9bf60aab3fa4/orchestrating) account on Livepeer's Explorer page shows current protocol-level metrics for the orchestrator.
+
+- The [Grafana dashboard](https://grafana.livepeer.0xcadams.xyz) is public and shows more detailed off-chain metrics related to ongoing transcoding work.
+
+### Orchestrator Improvement Proposals
+
+Whenever a protocol-level change is being considered, or significant change to the off-chain orchestrator parameters (e.g. price per unit or max face value for tickets), an Orchestrator Improvement Proposal (OIP) must be submitted by the maintainer(s) or by a delegator. This will consist of a PR similar to [OIP-1's](https://github.com/0xcadams/livepeer-open-orchestrator/pull/10) which outlines the proposed changes and the reasoning for the change.
+
+The community will be given seven (7) days to leave comments on the PR before it is merged and executed. If you are a delegator, please turn notifications on for PRs, so you can participate in these discussions.
+
+## Deploying
 
 ### Configuration
 
@@ -159,6 +164,19 @@ The [CI configuration](.github/workflows/deploy.yml) provides a good example of 
 ## Forking
 
 If you're interested in forking this project, please consider submitting useful PRs back to this repo for improvements for the community!
+
+## Shoutouts
+
+Check out the Livepeer orchestrators who support the community and inspired many of the practices baked into this repo:
+
+- [vires-in-numeris](https://explorer.livepeer.org/accounts/0x525419ff5707190389bfb5c87c375d710f5fcb0e/orchestrating)
+- [titan-node](https://explorer.livepeer.org/accounts/0xbe8770603daf200b1fa136ad354ba854928e602b/orchestrating)
+- [authority-null](https://explorer.livepeer.org/accounts/0x9d61ae5875e89036fbf6059f3116d01a22ace3c8/orchestrating)
+- [solarfarm.papa-bear](https://explorer.livepeer.org/accounts/0x10742714f33f3d804e3fa489618b5c3ca12a6df7/orchestrating)
+- [lptnode](https://explorer.livepeer.org/accounts/0x11b04d9a305abe978aeaddc67d9d09aaa4996090/orchestrating)
+- [ftkuhnsman](https://explorer.livepeer.org/accounts/0x4a43b1d7e6227c8b0512e413f406555647ff7bdb/orchestrating)
+- [nightnode](https://explorer.livepeer.org/accounts/0x47a907a0bd1627d71cd14430a721d1550d6d6f58/orchestrating)
+- and more!
 
 ## License
 
