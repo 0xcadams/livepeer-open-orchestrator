@@ -125,6 +125,12 @@ kube-prometheus-stack:
       datasources:
         uid: thanos
         url: http://global-thanos-query-frontend:9090
+    grafana.ini:
+      auth.anonymous:
+        enabled: true
+        org_name: Delegator
+        org_role: Viewer
+        hide_version: true
   prometheus:
     prometheusOperator:
       thanosImage:

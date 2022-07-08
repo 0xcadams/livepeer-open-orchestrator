@@ -1113,6 +1113,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -1207,6 +1208,6 @@
   "timezone": "",
   "title": "Overview",
   "uid": "Szm1Jwjnk",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
