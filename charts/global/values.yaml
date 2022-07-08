@@ -128,9 +128,7 @@ kube-prometheus-stack:
     grafana.ini:
       auth.anonymous:
         enabled: true
-        org_name: Delegator
         org_role: Viewer
-        hide_version: true
   prometheus:
     prometheusOperator:
       thanosImage:
