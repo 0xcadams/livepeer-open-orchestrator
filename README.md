@@ -43,9 +43,9 @@ There are a few resources for delegators to monitor the current performance for 
 
 ### Orchestrator Improvement Proposals
 
-Whenever a protocol-level change is being considered, or significant change to the off-chain orchestrator parameters (e.g. price per unit or max face value for tickets), an Orchestrator Improvement Proposal (OIP) must be submitted by the maintainer(s) or by a delegator. This will consist of a PR similar to [OIP-1's](https://github.com/0xcadams/livepeer-open-orchestrator/pull/10) which outlines the proposed changes and the reasoning for the change.
+Whenever a protocol-level change is being considered, or significant change to the off-chain orchestrator parameters (e.g. price per pixel, max face value for tickets, etc), an Orchestrator Improvement Proposal (OIP) must be submitted by the maintainer(s) or by a delegator. This will consist of a PR similar to [OIP-1's](https://github.com/0xcadams/livepeer-open-orchestrator/pull/10) which outlines the proposed changes and the reasoning for the change.
 
-The community will be given seven (7) days to leave comments on the PR before it is merged and executed. If you are a delegator, please turn notifications on for PRs, so you can participate in these discussions.
+**The community will be given seven (7) days to leave comments on the PR before it is merged and executed. If you are a delegator, please turn notifications on for PRs, so you can participate in these discussions.**
 
 ## Deploying
 
