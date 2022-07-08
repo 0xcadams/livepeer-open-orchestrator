@@ -876,8 +876,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -967,8 +966,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1056,8 +1054,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1145,8 +1142,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1196,7 +1192,7 @@
   "refresh": "10s",
   "schemaVersion": 36,
   "style": "dark",
-  "tags": [],
+  "tags": ["overview"],
   "templating": {
     "list": []
   },
@@ -1207,7 +1203,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Overview",
-  "uid": "Szm1Jwjnk",
-  "version": 6,
+  "uid": "overview",
+  "version": 3,
   "weekStart": ""
 }

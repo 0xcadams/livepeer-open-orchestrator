@@ -39,7 +39,7 @@ There are a few resources for delegators to monitor the current performance for 
 
 - The [`open-orchestrator.eth`](https://explorer.livepeer.org/accounts/0xfc9122f12b23d89a33f7e073072b9bf60aab3fa4/orchestrating) account on Livepeer's Explorer page shows current protocol-level metrics for the orchestrator.
 
-- The [Grafana dashboard](https://grafana.livepeer.0xcadams.xyz) is public and shows more detailed off-chain metrics related to ongoing transcoding work.
+- The [Grafana dashboards](https://grafana.livepeer.0xcadams.xyz/d/overview) are public and show more detailed off-chain metrics related to ongoing transcoding work and compute resources.
 
 ### Orchestrator Improvement Proposals
 

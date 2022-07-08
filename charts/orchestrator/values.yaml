@@ -12,7 +12,7 @@ orchestrator:
   ethAddress: 0xchangeme
 
   version: "0.5.32"
-  pricePerUnit: 1100
+  pricePerUnit: 1150
   blockPollingInterval: 15
   reward: "false"
   maxFaceValue: "20000000000000000"
