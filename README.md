@@ -95,7 +95,7 @@ The passwords used in the config should be unique, long, and randomly generated.
 If you would like to create `k3s` clusters, continue with this section. You'll first need to install [k3s](https://rancher.com/docs/k3s/latest/en/quick-start/) on the node which you would like to use as your main server. You must configure `k3s` to use Docker in order to take advantage of the NVIDIA container runtime by following the [runtime installation guide](https://github.com/NVIDIA/nvidia-container-runtime#installation). You will need to make sure to add the `default-runtime` to `/etc/docker/daemon.json`. Once that is complete, you can use:
 
 ```bash
-curl -sfL https://get.k3s.io | sh -s - --docker --node-external-ip xxx.xxx.xxx.xxx
+curl -sfL https://get.k3s.io | sh -s - --docker --disable traefik --node-external-ip xxx.xxx.xxx.xxx
 # this copies the k3s config to override your global kubectl config!
 cat /etc/rancher/k3s/k3s.yaml > ~/.kube/config
 ```
