@@ -142,7 +142,7 @@ After you create each cluster, you will have to handle some manual secret config
 kubectl create secret generic json-private-key --from-file=key.json=orchestrator.json
 ```
 
-You will also need to create the `rpc-auth` secret in the main cluster, which is used by NGINX to authenticate requests to the Arbitrum node.
+You will also need to create the `rpc-auth` secret in the **main cluster only**, which is used by NGINX to authenticate requests to the Arbitrum node.
 
 ```bash
 htpasswd -c auth orchestrator
