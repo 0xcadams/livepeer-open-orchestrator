@@ -1,5 +1,64 @@
 # Benchmarks for GPUs
 
+## Guide
+
+In order to benchmark a new GPU type, it is recommended to run `livepeer_bench` first to understand the performance of the node. You can either start a new node which is not being used by an active orchestrator, or stop an existing orchestrator to run the benchmarking on it.
+
+You'll first need to [enable GPU support](https://github.com/NVIDIA/k8s-device-plugin#enabling-gpu-support-in-kubernetes) in Kubernetes with a similar command to (see the link for an updated command):
+
+```bash
+kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.12.2/nvidia-device-plugin.yml
+```
+
+Then, you can run the following command to start a pod with Livepeer on it:
+
+```bash
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gpu-pod
+spec:
+  restartPolicy: Never
+  containers:
+    - name: lp
+      image: livepeer/go-livepeer:0.5.32
+      command:
+        - "sleep"
+        - "604800"
+      resources:
+        limits:
+          nvidia.com/gpu: 1 # requesting 1 GPU
+  tolerations:
+  - key: nvidia.com/gpu
+    operator: Exists
+    effect: NoSchedule
+EOF
+```
+
+This pod will hang for about a day, which should give enough time to run benchmarking tests on it. Exec onto the pod by running:
+
+```bash
+kubectl exec -it gpu-pod -- bash
+```
+
+Then, follow the steps to download the artifacts needed for [Livepeer benchmarking](https://docs.livepeer.org/video-miners/guides/benchmarking). Create a script with the following contents:
+
+```bash
+#!/bin/bash
+for i in {5..30}
+do
+  echo "#$i"
+  livepeer_bench \
+      -in bbb/source.m3u8 \
+      -transcodingOptions transcodingOptions.json \
+      -nvidia all \
+      -concurrentSessions $i |& grep "Duration Ratio" >> bench.log
+done
+```
+
+Then, run this script - it will run for a while and test 1 to 20 concurrent sessions, to see how the GPU performs with each. This should give you enough information to [choose a session limit](https://docs.livepeer.org/video-miners/guides/session-limits) for that GPU type.
+
 ## Results
 
 ### NVIDIA Tesla T4
@@ -46,62 +105,3 @@ Output from benchmarking:
 | 30                  | 1.223                    |
 
 The ideal session limit is around 23.
-
-## Benchmarking Guide
-
-In order to benchmark a new GPU type, it is recommended to run `livepeer_bench` first to understand the performance of the node. You can either start a new node which is not being used by an active orchestrator, or stop an existing orchestrator to run the benchmarking on it.
-
-You'll first need to [enable GPU support](https://github.com/NVIDIA/k8s-device-plugin#enabling-gpu-support-in-kubernetes) in Kubernetes with a similar command to (see the link for an updated command):
-
-```bash
-kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.12.2/nvidia-device-plugin.yml
-```
-
-Then, you can run the following command to start a pod with Livepeer on it:
-
-```bash
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: Pod
-metadata:
-  name: gpu-pod
-spec:
-  restartPolicy: Never
-  containers:
-    - name: lp
-      image: livepeer/go-livepeer:0.5.32
-      command:
-        - "sleep"
-        - "604800"
-      resources:
-        limits:
-          nvidia.com/gpu: 1 # requesting 1 GPU
-  tolerations:
-  - key: nvidia.com/gpu
-    operator: Exists
-    effect: NoSchedule
-EOF
-```
-
-This pod will hang for about a day, which should give enough time to run benchmarking tests on it. Exec onto the pod by running:
-
-```bash
-kubectl exec -it gpu-pod -- bash
-```
-
-Then, follow the steps to download the artifacts needed for [Livepeer benchmarking](https://docs.livepeer.org/video-miners/guides/benchmarking). Create a script with the following contents:
-
-```bash
-#!/bin/bash
-for i in {5..20}
-do
-  echo "#$i"
-  livepeer_bench \
-      -in bbb/source.m3u8 \
-      -transcodingOptions transcodingOptions.json \
-      -nvidia all \
-      -concurrentSessions $i |& grep "Duration Ratio" >> bench.log
-done
-```
-
-Then, run this script - it will run for a while and test 1 to 20 concurrent sessions, to see how the GPU performs with each. This should give you enough information to [choose a session limit](https://docs.livepeer.org/video-miners/guides/session-limits) for that GPU type.

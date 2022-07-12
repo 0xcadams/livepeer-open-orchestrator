@@ -16,3 +16,7 @@ orchestrator:
   blockPollingInterval: 15
   reward: "false"
   maxFaceValue: "20000000000000000"
+  maxSessionsPerOrchestratorForRegion:
+    virginia: 14
+    frankfurt: 14
+    california: 23

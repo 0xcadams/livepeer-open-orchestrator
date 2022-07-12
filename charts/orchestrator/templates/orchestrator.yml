@@ -27,7 +27,7 @@ spec:
             - -cliAddr=0.0.0.0:7935
             - -httpAddr=0.0.0.0:8935
             - -serviceAddr={{ .Values.global.domain }}:8935
-            - -maxSessions=12
+            - -maxSessions={{ get .Values.orchestrator.maxSessionsPerOrchestratorForRegion .Values.global.geolocation }}
             - -nvidia=all
             - -ethUrl=http://arbitrum-nginx-proxy:8555
             {{- if not .Values.orchestrator.reward }}
