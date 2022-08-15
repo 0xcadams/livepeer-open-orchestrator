@@ -35,9 +35,9 @@ data:
       server {
         listen 0.0.0.0:8557;
         location / {
-          proxy_pass https://arbitrum.ftkuhnsman.com/api/{{ .Values.arbitrum.ftkuhnsmanApiKey }}/l2/;
-          proxy_set_header Host arbitrum.ftkuhnsman.com;
-          proxy_set_header X-Forwarded-Host arbitrum.ftkuhnsman.com;
+          proxy_pass https://rpc.ftklivepeer.net/api/{{ .Values.arbitrum.ftkuhnsmanApiKey }}/l2/;
+          proxy_set_header Host rpc.ftklivepeer.net;
+          proxy_set_header X-Forwarded-Host rpc.ftklivepeer.net;
         }
       }
 
