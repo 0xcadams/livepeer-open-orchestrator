@@ -11,7 +11,7 @@ orchestrator:
   network: arbitrum-one-mainnet
   ethAddress: 0xchangeme
 
-  version: "0.5.33"
+  version: "0.5.34"
   pricePerUnit: 1100
   blockPollingInterval: 15
   reward: "false"

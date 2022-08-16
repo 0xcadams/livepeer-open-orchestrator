@@ -22,7 +22,7 @@ spec:
   restartPolicy: Never
   containers:
     - name: lp
-      image: livepeer/go-livepeer:0.5.32
+      image: livepeer/go-livepeer:0.5.34
       command:
         - "sleep"
         - "604800"
