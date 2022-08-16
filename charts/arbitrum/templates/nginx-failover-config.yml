@@ -35,6 +35,7 @@ data:
       server {
         listen 0.0.0.0:8557;
         location / {
+          proxy_ssl_server_name on;
           proxy_pass https://rpc.ftklivepeer.net/api/{{ .Values.arbitrum.ftkuhnsmanApiKey }}/l2/;
           proxy_set_header Host rpc.ftklivepeer.net;
           proxy_set_header X-Forwarded-Host rpc.ftklivepeer.net;
@@ -44,6 +45,7 @@ data:
       server {
         listen 0.0.0.0:8558;
         location / {
+          proxy_ssl_server_name on;
           proxy_pass https://arbitrum-mainnet.infura.io/v3/{{ .Values.arbitrum.infuraProjectId }};
           proxy_set_header Host arbitrum-mainnet.infura.io;
           proxy_set_header X-Forwarded-Host arbitrum-mainnet.infura.io;
