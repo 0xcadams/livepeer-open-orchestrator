@@ -206,6 +206,22 @@ prometheus-json-exporter:
         - name: transcoding_stream_scores
           type: object
           help: Raw transcoder stats
+          path: '{.SAO[0]}'
+          labels:
+            id: '{.timestamp}'
+            source: '{.region}'
+          values:
+            segments_sent: '{.segments_sent}'
+            segments_received: '{.segments_received}'
+            success_rate: '{.success_rate}'
+            seg_duration: '{.seg_duration}'
+            upload_time: '{.upload_time}'
+            download_time: '{.download_time}'
+            transcode_time: '{.transcode_time}'
+            round_trip_time: '{.round_trip_time}'
+        - name: transcoding_stream_scores
+          type: object
+          help: Raw transcoder stats
           path: '{.LON[0]}'
           labels:
             id: '{.timestamp}'
