@@ -18,6 +18,7 @@ spec:
       containers:
         - name: "{{ .Chart.Name }}"
           image: "livepeer/go-livepeer:{{ .Values.orchestrator.version }}"
+          command: ["/usr/local/bin/livepeer"]
           args:
             - -v=6
             - -network={{ .Values.orchestrator.network }}
