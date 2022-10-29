@@ -11,7 +11,7 @@ orchestrator:
   network: arbitrum-one-mainnet
   ethAddress: 0xchangeme
 
-  version: "0.5.34"
+  version: "0.5.35"
   pricePerUnit: 1100
   blockPollingInterval: 15
   reward: "false"
@@ -19,4 +19,4 @@ orchestrator:
   maxSessionsPerOrchestratorForRegion:
     virginia: 14
     frankfurt: 14
-    california: 23
+    # california: 23
