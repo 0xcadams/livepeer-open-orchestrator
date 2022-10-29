@@ -19,4 +19,4 @@ orchestrator:
   maxSessionsPerOrchestratorForRegion:
     virginia: 14
     frankfurt: 14
-    # california: 23
+    california: 23
