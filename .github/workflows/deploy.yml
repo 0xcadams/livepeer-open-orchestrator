@@ -22,7 +22,7 @@ jobs:
       - name: Install
         run: yarn --immutable
 
-      - uses: azure/setup-helm@v3.4
+      - uses: azure/setup-helm@v3.3
       - uses: azure/setup-kubectl@v3.0
 
       - name: Get Release Version
@@ -49,6 +49,7 @@ jobs:
 
           yarn deploy:virginia
           yarn deploy:frankfurt
+          yarn deploy:california
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
