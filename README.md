@@ -98,6 +98,8 @@ If you would like to create `k3s` clusters, continue with this section. You'll f
 curl -sfL https://get.k3s.io | sh -s - --docker --disable traefik --node-external-ip xxx.xxx.xxx.xxx
 # this copies the k3s config to override your global kubectl config!
 cat /etc/rancher/k3s/k3s.yaml > ~/.kube/config
+# this copies the kube config to the clipboard for use in github actions
+cat ~/.kube/config | base64 | pbcopy
 ```
 
 The node IP should be your external static IP for the node you are running. _Note: this may not be necessary depending on the environment you are running in._ The `--docker` flag ensures that the `k3s` pods run in Docker, which allows for the NVIDIA runtime.
