@@ -14,7 +14,7 @@
         "target": {
           "limit": 100,
           "matchAny": false,
-          "tags": [ ],
+          "tags": [],
           "type": "dashboard"
         },
         "type": "dashboard"
@@ -25,7 +25,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 27,
-  "links": [ ],
+  "links": [],
   "liveNow": false,
   "panels": [
     {
@@ -65,29 +65,27 @@
               "viz": false
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "min": 0
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
-        "w": 10,
+        "w": 9,
         "x": 0,
         "y": 3
       },
       "id": 8,
       "options": {
-        "displayLabels": [ ],
+        "displayLabels": [],
         "legend": {
           "displayMode": "list",
           "placement": "bottom"
         },
         "pieType": "donut",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -123,7 +121,7 @@
             "mode": "thresholds"
           },
           "decimals": 1,
-          "mappings": [ ],
+          "mappings": [],
           "max": 1,
           "thresholds": {
             "mode": "absolute",
@@ -140,21 +138,19 @@
           },
           "unit": "percentunit"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 10,
+        "w": 6,
+        "x": 9,
         "y": 3
       },
       "id": 228,
       "options": {
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -168,8 +164,9 @@
             "type": "prometheus",
             "uid": "thanos"
           },
-          "editorMode": "code",
-          "expr": "sum(livepeer_current_sessions_total{node_type=\"orch\"}) / sum(livepeer_max_sessions_total{node_type=\"orch\"})",
+          "editorMode": "builder",
+          "expr": "sum by(geolocation) (livepeer_current_sessions_total{node_type=\"orch\"}) / sum by(geolocation) (livepeer_max_sessions_total{node_type=\"orch\"})",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -218,7 +215,7 @@
               "mode": "off"
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -234,18 +231,18 @@
           },
           "unit": "Ξ"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
-        "w": 10,
-        "x": 14,
+        "w": 9,
+        "x": 15,
         "y": 3
       },
       "id": 226,
       "options": {
         "legend": {
-          "calcs": [ ],
+          "calcs": [],
           "displayMode": "hidden",
           "placement": "bottom"
         },
@@ -281,7 +278,7 @@
             "mode": "thresholds"
           },
           "decimals": 4,
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -297,12 +294,12 @@
           },
           "unit": "ETH"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 10,
+        "w": 6,
+        "x": 9,
         "y": 7
       },
       "id": 236,
@@ -312,9 +309,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -395,7 +390,7 @@
             ]
           }
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -404,7 +399,7 @@
         "y": 11
       },
       "id": 224,
-      "links": [ ],
+      "links": [],
       "options": {
         "alignValue": "left",
         "legend": {
@@ -464,7 +459,7 @@
             "lineWidth": 0,
             "spanNulls": false
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -480,7 +475,7 @@
           },
           "unit": "percentunit"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -536,7 +531,7 @@
             "spanNulls": false
           },
           "decimals": 3,
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -555,7 +550,7 @@
             ]
           }
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -633,7 +628,7 @@
               "mode": "off"
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -648,7 +643,7 @@
             ]
           }
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -659,7 +654,7 @@
       "id": 12,
       "options": {
         "legend": {
-          "calcs": [ ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -722,7 +717,7 @@
               "mode": "off"
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -737,7 +732,7 @@
             ]
           }
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -748,7 +743,7 @@
       "id": 2,
       "options": {
         "legend": {
-          "calcs": [ ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -811,13 +806,12 @@
               "mode": "off"
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -827,7 +821,7 @@
           },
           "unit": "Bps"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -838,7 +832,7 @@
       "id": 240,
       "options": {
         "legend": {
-          "calcs": [ ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -901,13 +895,12 @@
               "mode": "off"
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -916,7 +909,7 @@
             ]
           }
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -927,7 +920,7 @@
       "id": 230,
       "options": {
         "legend": {
-          "calcs": [ ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -993,13 +986,12 @@
               "mode": "off"
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1008,7 +1000,7 @@
             ]
           }
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -1019,7 +1011,7 @@
       "id": 16,
       "options": {
         "legend": {
-          "calcs": [ ],
+          "calcs": [],
           "displayMode": "hidden",
           "placement": "bottom"
         },
@@ -1081,13 +1073,12 @@
               "mode": "off"
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1097,7 +1088,7 @@
           },
           "unit": "percent"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -1108,7 +1099,7 @@
       "id": 232,
       "options": {
         "legend": {
-          "calcs": [ ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1172,13 +1163,12 @@
               "mode": "off"
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1188,7 +1178,7 @@
           },
           "unit": "fahrenheit"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -1199,7 +1189,7 @@
       "id": 238,
       "options": {
         "legend": {
-          "calcs": [ ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -1265,13 +1255,12 @@
               "mode": "off"
             }
           },
-          "mappings": [ ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1280,7 +1269,7 @@
             ]
           }
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -1291,7 +1280,7 @@
       "id": 10,
       "options": {
         "legend": {
-          "calcs": [ ],
+          "calcs": [],
           "displayMode": "hidden",
           "placement": "bottom"
         },
@@ -1320,20 +1309,18 @@
   "refresh": "10s",
   "schemaVersion": 36,
   "style": "dark",
-  "tags": [
-    "overview"
-  ],
+  "tags": ["overview"],
   "templating": {
-    "list": [ ]
+    "list": []
   },
   "time": {
     "from": "now-6h",
     "to": "now"
   },
-  "timepicker": { },
+  "timepicker": {},
   "timezone": "",
   "title": "Overview",
   "uid": "overview",
-  "version": 27,
+  "version": 28,
   "weekStart": ""
 }

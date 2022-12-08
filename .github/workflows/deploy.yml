@@ -49,7 +49,6 @@ jobs:
 
           yarn deploy:virginia
           yarn deploy:frankfurt
-          yarn deploy:california
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -74,7 +73,6 @@ jobs:
 
           ETH_ADDRESS: ${{ secrets.ETH_ADDRESS }}
           PRIMARY_JSON_WALLET_PASSWORD: ${{ secrets.PRIMARY_JSON_WALLET_PASSWORD }}
-          SECONDARY_JSON_WALLET_PASSWORD: ${{ secrets.SECONDARY_JSON_WALLET_PASSWORD }}
 
           INFURA_PROJECT_ID: ${{ secrets.INFURA_PROJECT_ID }}
           FTKUHNSMAN_API_KEY: ${{ secrets.FTKUHNSMAN_API_KEY }}
