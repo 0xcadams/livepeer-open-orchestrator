@@ -22,7 +22,7 @@ jobs:
       - name: Install
         run: yarn --immutable
 
-      - uses: azure/setup-helm@v3.4
+      - uses: azure/setup-helm@v3.5
       - uses: azure/setup-kubectl@v3.1
 
       - name: Get Release Version
