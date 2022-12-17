@@ -10,7 +10,7 @@ global:
   awsSecretAccessKey: changeme
   geolocationAwsRegions:
     virginia: "us-east-1"
-    frankfurt: "eu-central-1"
+    # frankfurt: "eu-central-1"
 
   primaryJsonWalletPassword: changeme
 
@@ -22,7 +22,7 @@ thanos:
       enabled: false
     stores:
       - "dnssrv+_grpc._tcp.global-kube-prometheus-sta-thanos-discovery.default.svc.cluster.local"
-      - "frankfurt.thanos.livepeer.0xcadams.xyz:10901"
+      # - "frankfurt.thanos.livepeer.0xcadams.xyz:10901"
   queryFrontend:
     enabled: false
   compactor:
