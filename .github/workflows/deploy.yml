@@ -23,7 +23,7 @@ jobs:
         run: yarn --immutable
 
       - uses: azure/setup-helm@v3.5
-      - uses: azure/setup-kubectl@v3.1
+      - uses: azure/setup-kubectl@v3.2
 
       - name: Get Release Version
         id: tag_version
