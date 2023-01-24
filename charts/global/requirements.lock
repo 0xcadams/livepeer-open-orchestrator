@@ -16,9 +16,9 @@ dependencies:
   version: 0.2.1
 - name: thanos
   repository: https://charts.bitnami.com/bitnami
-  version: 10.5.0
+  version: 12.0.0
 - name: nvidia-device-plugin
   repository: https://nvidia.github.io/k8s-device-plugin
   version: 0.12.0
-digest: sha256:1a636b63db6ae60558cc81b041e467edf9fb15b9981d2ef912c64fcc4eb204a4
-generated: "2022-06-11T17:49:20.67391-07:00"
+digest: sha256:603cc40ae04d6445f3bdf806f2b862bbef45e1beb5aaeb5a326da176fc8c6a17
+generated: "2023-01-24T10:03:56.536055-07:00"
