@@ -29,7 +29,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push GPU monitoring
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: "{{defaultContext}}:docker/nvidia-gpu-monitoring"
           platforms: linux/amd64,linux/arm64
