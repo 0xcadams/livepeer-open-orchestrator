@@ -21,6 +21,19 @@ Open infra-as-code for a globally distributed Livepeer orchestrator/transcoder, 
   </a>
 </p>
 
+<h4>⚠️ Warning - this repository is not actively maintained and the orchestrator is no longer active.</h4>
+
+See these orchestrators as great alternatives to stake with:
+
+- [vires-in-numeris](https://explorer.livepeer.org/accounts/0x525419ff5707190389bfb5c87c375d710f5fcb0e/orchestrating)
+- [pon-node.eth](https://explorer.livepeer.org/accounts/0xdc28f2842810d1a013ad51de174d02eaba192dc7/orchestrating)
+- [titan-node](https://explorer.livepeer.org/accounts/0xbe8770603daf200b1fa136ad354ba854928e602b/orchestrating)
+- [authority-null](https://explorer.livepeer.org/accounts/0x9d61ae5875e89036fbf6059f3116d01a22ace3c8/orchestrating)
+- [solarfarm.papa-bear](https://explorer.livepeer.org/accounts/0x10742714f33f3d804e3fa489618b5c3ca12a6df7/orchestrating)
+- [lptnode](https://explorer.livepeer.org/accounts/0x11b04d9a305abe978aeaddc67d9d09aaa4996090/orchestrating)
+- [ftkuhnsman](https://explorer.livepeer.org/accounts/0x4a43b1d7e6227c8b0512e413f406555647ff7bdb/orchestrating)
+- [nightnode](https://explorer.livepeer.org/accounts/0x47a907a0bd1627d71cd14430a721d1550d6d6f58/orchestrating)
+
 ## Features
 
 - 🚀 Automated deployment to Kubernetes using Github Actions
@@ -166,19 +179,6 @@ The [CI configuration](.github/workflows/deploy.yml) provides a good example of 
 ## Forking
 
 If you're interested in forking this project, please consider submitting useful PRs back to this repo for improvements for the community!
-
-## Shoutouts
-
-Check out the Livepeer orchestrators who support the community and inspired many of the practices baked into this repo:
-
-- [vires-in-numeris](https://explorer.livepeer.org/accounts/0x525419ff5707190389bfb5c87c375d710f5fcb0e/orchestrating)
-- [titan-node](https://explorer.livepeer.org/accounts/0xbe8770603daf200b1fa136ad354ba854928e602b/orchestrating)
-- [authority-null](https://explorer.livepeer.org/accounts/0x9d61ae5875e89036fbf6059f3116d01a22ace3c8/orchestrating)
-- [solarfarm.papa-bear](https://explorer.livepeer.org/accounts/0x10742714f33f3d804e3fa489618b5c3ca12a6df7/orchestrating)
-- [lptnode](https://explorer.livepeer.org/accounts/0x11b04d9a305abe978aeaddc67d9d09aaa4996090/orchestrating)
-- [ftkuhnsman](https://explorer.livepeer.org/accounts/0x4a43b1d7e6227c8b0512e413f406555647ff7bdb/orchestrating)
-- [nightnode](https://explorer.livepeer.org/accounts/0x47a907a0bd1627d71cd14430a721d1550d6d6f58/orchestrating)
-- and more!
 
 ## License
 
